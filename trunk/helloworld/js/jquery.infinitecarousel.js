@@ -7,7 +7,9 @@
  * @copyright (c) 2009 admin@catchmyfame.com (www.catchmyfame.com)
  * @license CC Attribution-Share Alike 3.0 - http://creativecommons.org/licenses/by-sa/3.0/
  */
-
+var test1 = "";
+var test2 = "";
+var test3 = "";
 (function($){
 	$.fn.extend({ 
 		infiniteCarousel: function(options)
@@ -163,9 +165,9 @@
 						$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500); // Raise textholder
 						showminmax();
                   // Read-aloud of Japanese
-                  //var URL = "http://translate.google.com/translate_tts?tl=ja&q=";
-                  //var audio = new Audio(encodeURI(URL + "\"" + t + "\""));
-                  //audio.play();
+                  var URL = "http://translate.google.com/translate_tts?tl=ja&q=";
+                  var audio = new Audio(URL + encodeURIComponent(t));
+                  audio.play();
 					}
 				}
 				function showminmax()
