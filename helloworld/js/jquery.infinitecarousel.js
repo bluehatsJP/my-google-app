@@ -163,7 +163,7 @@
 						$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500); // Raise textholder
 						showminmax();
                   // Read-aloud of Japanese
-                  var URL = "http://translate.google.com/translate_tts?q=";
+                  var URL = "http://translate.google.com/translate_tts?tl=ja&q=";
                   var audio = new Audio(URL+t);
                   audio.play();
 					}
