@@ -174,9 +174,8 @@
                         }
 
 						$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500); // Raise textholder
-                        //setTimeout($('#textholder'+randID).html(t).animate({marginBottom:'0px'},500);,10000);
-
 						showminmax();
+                        //setTimeout(function() {$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500);showminmax();},10000);
 					}
 				}
 				function showminmax()
