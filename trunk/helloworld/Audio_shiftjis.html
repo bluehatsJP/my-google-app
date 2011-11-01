@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="Shift_JIS">
+        <title>TM Labo: Google API - 読み上げ機能(非公式API)</title>
+        <style>
+            /* 等幅にしておく */
+            * {
+                 font-family: monospace;
+            }
+        </style>
+        <script type="text/javascript">
+            
+            // qの値に応じてmp3を返すURL
+            var URL = "http://translate.google.com/translate_tts?tl=ja&q=";
+//            var URL = "http://translate.google.com/translate_tts?q=i+love+programming";
+
+            var readAloud = function(element){
+                // 入力した文字の空白や区切りを'+'に置換
+                var query = element.value.replace(/\s/g, '+');
+                // HTMLAudioElementを生成
+                var audio = new Audio(URL + encodeURIComponent(query));
+                // 再生
+                // onloadだとうまくいかなかった。Chromeだと別スレッドで読み込み終了次第再生する模様
+                //audio.play();
+                setTimeout(function(){audio.play();}, 100);
+            }
+        </script>
+    </head>
+    
+    <body onload="readAloud(fm.q);">
+        <h1>Google API - 読み上げ機能(非公式API)</h1>
+        <p>
+            Googleの公式翻訳サイトで読み上げ機能があったので、<br />
+            きっとAPIがあるとおもい探してみたところ、非公式ながら発見！！<br />
+            早速つかってみました。<br />
+            ※Chromeでは問題なく動きますが、Firefoxだと動かなかったです。IEは調べるまでもないｗ
+        </p>
+        
+        <form name="fm" onsubmit="return false;">
+            <input type="text" name="q" value="日本語を読む" />
+            <input type="submit" onclick="readAloud(fm.q);" value="再生" />
+        </form>
+        
+        <hr />
+        <a href="http://tm-labo.com/">Home</a>
+<audio controls autobuffer>
+  <source src="http://translate.google.com/translate_tts?tl=ja&q=Hello+world" />
+</audio>
+    </body>
+</html>
