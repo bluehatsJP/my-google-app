@@ -159,22 +159,24 @@
 					// the text will always be the text of the second list item (if it exists)
 					if(t != null)
 					{
-						$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500); // Raise textholder
-						showminmax();
                         // Read-aloud of Japanese
                         var URL = "http://translate.google.com/translate_tts?tl=ja&q="; // Japanese
                         //var URL = "http://translate.google.com/translate_tts?q=";     // English
                         //var audio = new Audio(URL + encodeURIComponent(t));
-                        //var audio = new Audio(URL + encodeURIComponent("Hello, Rino."));
                         var audio = new Audio("");
                         var canPlayMp3 = ("" != audio.canPlayType("audio/mpeg"));
                         if(canPlayMp3)
                         {
-                            audio.src = URL + encodeURIComponent(t)
+                            audio.src = URL + encodeURIComponent(t);
+                            //audio.src = URL + encodeURIComponent("Hello, Rino.");
                             audio.play();
-                            //setTimeout(function(){audio.play();}, 3000);
                             //while (!audio.ended){}
                         }
+
+						$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500); // Raise textholder
+                        //setTimeout($('#textholder'+randID).html(t).animate({marginBottom:'0px'},500);,10000);
+
+						showminmax();
 					}
 				}
 				function showminmax()
