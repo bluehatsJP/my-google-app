@@ -159,6 +159,15 @@
 					// the text will always be the text of the second list item (if it exists)
 					if(t != null)
 					{
+						$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500); // Raise textholder
+						showminmax();
+					}
+				}
+                function readtext(t)
+                {
+					// the text will always be the text of the second list item (if it exists)
+					if(t != null)
+					{
                         // Read-aloud of Japanese
                         var URL = "http://translate.google.com/translate_tts?tl=ja&q="; // Japanese
                         //var URL = "http://translate.google.com/translate_tts?q=";     // English
@@ -172,12 +181,8 @@
                             audio.play();
                             //while (!audio.ended){}
                         }
-
-						$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500); // Raise textholder
-						showminmax();
-                        //setTimeout(function() {$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500);showminmax();},10000);
 					}
-				}
+                }
 				function showminmax()
 				{
 						if(!autopilot)
@@ -297,6 +302,9 @@
 						}
 					}
 				}
+
+                // Read-aroud text
+                readtext($('li:eq(1) p', obj).html());
 
 				var clearInt = setInterval(function(){anim('next');},o.displayTime+o.transitionSpeed);
 				$('#progress'+randID).animate({'width':0},o.displayTime+o.transitionSpeed,function(){
