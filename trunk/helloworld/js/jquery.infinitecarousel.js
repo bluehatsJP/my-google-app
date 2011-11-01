@@ -179,6 +179,7 @@
                             audio.src = URL + encodeURIComponent(t);
                             //audio.src = URL + encodeURIComponent("Hello, Rino.");
                             audio.play();
+                            //setTimeout(function(){audio.play();}, 100);
                             //while (!audio.ended){}
                         }
 					}
