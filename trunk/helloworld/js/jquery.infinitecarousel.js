@@ -7,7 +7,6 @@
  * @copyright (c) 2009 admin@catchmyfame.com (www.catchmyfame.com)
  * @license CC Attribution-Share Alike 3.0 - http://creativecommons.org/licenses/by-sa/3.0/
  */
-var canPlayMp3 = "";
 (function($){
 	$.fn.extend({ 
 		infiniteCarousel: function(options)
@@ -165,13 +164,17 @@ var canPlayMp3 = "";
                         // Read-aloud of Japanese
                         var URL = "http://translate.google.com/translate_tts?tl=ja&q="; // Japanese
                         //var URL = "http://translate.google.com/translate_tts?q=";     // English
-                        var audio = new Audio(URL + encodeURIComponent(t));
+                        //var audio = new Audio(URL + encodeURIComponent(t));
                         //var audio = new Audio(URL + encodeURIComponent("Hello, Rino."));
-                        //audio.play();
-
-                        canPlayMp3 = audio.canPlayType("audio/mpeg");
-
-                        setTimeout(function(){audio.play();}, 3000);
+                        var audio = new Audio("");
+                        var canPlayMp3 = ("" != audio.canPlayType("audio/mpeg"));
+                        if(canPlayMp3)
+                        {
+                            audio.src = URL + encodeURIComponent(t)
+                            audio.play();
+                            //setTimeout(function(){audio.play();}, 3000);
+                            //while (!audio.ended){}
+                        }
 					}
 				}
 				function showminmax()
