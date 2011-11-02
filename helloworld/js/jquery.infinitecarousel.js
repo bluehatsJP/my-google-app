@@ -163,7 +163,7 @@
 						showminmax();
 					}
 				}
-                function readtext(t)
+                function readaloudtext(t)
                 {
 					// the text will always be the text of the second list item (if it exists)
 					if(t != null)
@@ -305,7 +305,7 @@
 				}
 
                 // Read-aroud text
-                readtext($('li:eq(1) p', obj).html());
+                readaloudtext($('li:eq(1) p', obj).html());
 
 				var clearInt = setInterval(function(){anim('next');},o.displayTime+o.transitionSpeed);
 				$('#progress'+randID).animate({'width':0},o.displayTime+o.transitionSpeed,function(){
