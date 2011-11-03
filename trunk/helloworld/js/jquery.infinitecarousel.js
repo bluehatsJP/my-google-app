@@ -7,6 +7,7 @@
  * @copyright (c) 2009 admin@catchmyfame.com (www.catchmyfame.com)
  * @license CC Attribution-Share Alike 3.0 - http://creativecommons.org/licenses/by-sa/3.0/
  */
+var audio = new Audio("");
 (function($){
 	$.fn.extend({ 
 		infiniteCarousel: function(options)
@@ -174,7 +175,7 @@
                         var URL = "http://translate.google.com/translate_tts?tl=ja&q="; // Japanese
                         //var URL = "http://translate.google.com/translate_tts?q=";     // English
                         //var audio = new Audio(URL + encodeURIComponent(t));
-                        var audio = new Audio("");
+                        //var audio = new Audio("");
                         var canPlayMp3 = ("" != audio.canPlayType("audio/mpeg"));
                         if(canPlayMp3)
                         {
