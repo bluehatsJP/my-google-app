@@ -16,6 +16,9 @@ handlers:
 - url: /photo
   script: photo.py
 
+- url: /audio
+  script: audio.py
+
 - url: /.html
   static_files: /\1
   upload: /.html

@@ -160,6 +160,8 @@
 					if(t != null)
 					{
 						$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500); // Raise textholder
+                        // Read-aroud text
+                        //$('#textholder'+randID).click(function(){readaloudtext(t);});
 						showminmax();
 					}
 				}
@@ -177,7 +179,6 @@
                         if(canPlayMp3)
                         {
                             audio.src = URL + encodeURIComponent(t);
-                            //audio.src = URL + encodeURIComponent("Hello, Rino.");
                             audio.play();
                             //setTimeout(function(){audio.play();}, 100);
                             //while (!audio.ended){}
@@ -305,7 +306,7 @@
 				}
 
                 // Read-aroud text
-                readaloudtext($('li:eq(1) p', obj).html());
+                //readaloudtext($('li:eq(1) p', obj).html());
 
 				var clearInt = setInterval(function(){anim('next');},o.displayTime+o.transitionSpeed);
 				$('#progress'+randID).animate({'width':0},o.displayTime+o.transitionSpeed,function(){
