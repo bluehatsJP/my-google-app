@@ -161,7 +161,7 @@
 					{
 						$('#textholder'+randID).html(t).animate({marginBottom:'0px'},500); // Raise textholder
                         // Read-aroud text
-                        //$('#textholder'+randID).click(function(){readaloudtext(t);});
+                        $('#textholder'+randID).click(function(){readaloudtext(t);});
 						showminmax();
 					}
 				}
