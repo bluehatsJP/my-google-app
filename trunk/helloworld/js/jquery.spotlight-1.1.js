@@ -138,6 +138,8 @@
 										   .css('float'   , 'left');
 										   
 			obj.mousemove(function(e) {
+			//obj.bind('touchmove', function(e) {
+                //e.preventDefault();
 				//Get X,Y of mouse from header 
 				var X = e.pageX - this.offsetLeft;
 				var Y = e.pageY - this.offsetTop;
