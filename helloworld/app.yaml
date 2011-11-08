@@ -19,6 +19,9 @@ handlers:
 - url: /audio
   script: audio.py
 
+- url: /spot
+  script: spotlight.py
+
 - url: /.html
   static_files: /\1
   upload: /.html

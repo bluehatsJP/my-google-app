@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Rino's spotlight</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.spotlight-1.1-min.js"></script>
+  <script type="text/javascript">
+	$().ready(function() {
+		$('#header').spotlight( {
+			overLayer: "headerOver",
+			spotLightImage: '/images/spotlight.png',
+			overLayerBg: '#000'
+		});
+	});
+  </script>
+  <style type="text/css">
+	#header {
+		position: relative;
+		width: 960px;
+		height: 576px;
+		border: 1px solid black;
+		background: url("{{ photo.content.src }}") no-repeat;
+		overflow: hidden;
+	}
+  </style>
+</head>
+<body>
+<div id="header"><div id="headerOver"><img src="/images/spotlight.png" width="339" height="336" alt="" /></div></div>
+</body>
+</html>
