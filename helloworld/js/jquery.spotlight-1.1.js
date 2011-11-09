@@ -137,12 +137,16 @@
 			$('#'+options.overLayer+' div').css('position', 'relative')
 										   .css('float'   , 'left');
 										   
-			obj.mousemove(function(e) {
+			//obj.mousemove(function(e) {
+			obj.bind('touchmove mousemove', function(e) {
 			//obj.bind('touchmove', function(e) {
-                //e.preventDefault();
+				// edit
+				var event = e.originalEvent;
+				var X = event.pageX - this.offsetLeft;
+				var Y = event.pageY - this.offsetTop;
 				//Get X,Y of mouse from header 
-				var X = e.pageX - this.offsetLeft;
-				var Y = e.pageY - this.offsetTop;
+				//var X = e.pageX - this.offsetLeft;
+				//var Y = e.pageY - this.offsetTop;
 	
 				var newLocationTop  = Y - (overLayerHeight/ 2);
 				var newLocationLeft = X - (overLayerWidth / 2);
