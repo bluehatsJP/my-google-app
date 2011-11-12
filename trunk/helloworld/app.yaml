@@ -13,6 +13,9 @@ handlers:
 - url: /images
   static_dir: images
 
+- url: /css
+  static_dir: css
+
 - url: /photo
   script: photo.py
 
@@ -21,6 +24,9 @@ handlers:
 
 - url: /spot
   script: spotlight.py
+
+- url: /puzzle
+  script: puzzle.py
 
 - url: /.html
   static_files: /\1
