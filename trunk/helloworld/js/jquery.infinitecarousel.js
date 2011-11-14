@@ -176,10 +176,22 @@ var audio = new Audio("");
                         //var URL = "http://translate.google.com/translate_tts?q=";     // English
                         //var audio = new Audio(URL + encodeURIComponent(t));
                         //var audio = new Audio("");
+
+                        // translate English
+                        //var text = t;
+                        //$(function(){
+                        //    google.language.translate(t, "ja", "en", function(result) {
+                        //        if (!result.error) {
+                        //            text = result.translation;
+                        //        }
+                        //    });
+                        //});
+
                         var canPlayMp3 = ("" != audio.canPlayType("audio/mpeg"));
                         if(canPlayMp3)
                         {
                             audio.src = URL + encodeURIComponent(t);
+                            //audio.src = URL + encodeURIComponent(text);
                             audio.play();
                             //setTimeout(function(){audio.play();}, 100);
                             //while (!audio.ended){}
