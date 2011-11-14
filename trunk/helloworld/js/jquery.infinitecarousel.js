@@ -191,6 +191,7 @@ var audio = new Audio("");
                         if(canPlayMp3)
                         {
                             audio.src = URL + encodeURIComponent(t);
+                            //audio.src = URL + UnescapeUTF8(EscapeUTF8(t));
                             //audio.src = URL + encodeURIComponent(text);
                             audio.play();
                             //setTimeout(function(){audio.play();}, 100);
