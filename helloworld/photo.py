@@ -1,10 +1,10 @@
 import os
-import uuid
+#import uuid
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
-from google.appengine.api import channel
+#from google.appengine.api import channel
 
 from gdata.alt import appengine
 from gdata.photos import service
@@ -13,8 +13,8 @@ class MainPage(webapp.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__),'photo.html')
 
-        client_id = str(uuid.uuid4())
-        token = channel.create_channel(client_id)
+        #client_id = str(uuid.uuid4())
+        #token = channel.create_channel(client_id)
 
         #client setup
         gd_client = service.PhotosService()
@@ -27,7 +27,8 @@ class MainPage(webapp.RequestHandler):
         #Get photo
         photos = gd_client.GetFeed('/data/feed/api/user/%s/albumid/%s?kind=photo' % (
             'sirihikareue0214',album.gphoto_id.text))
-        template_values = {'album': album,'photos': photos,'token' : token,'client_id' : client_id}
+        #template_values = {'album': album,'photos': photos,'token' : token,'client_id' : client_id}
+        template_values = {'album': album,'photos': photos}
         #template_values = {}
         
         self.response.out.write(template.render(path,template_values))

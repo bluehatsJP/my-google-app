@@ -191,22 +191,22 @@ var audio = new Audio("");
                         if(canPlayMp3)
                         {
                             // Header Referer 404 support
-                            socket = channel.open();
-                            socket.onmessage  = function(){
-                                audio.src = URL + encodeURIComponent(t);
-                                audio.play();
+                            //socket = channel.open();
+                            //socket.onmessage  = function(){
+                            //    audio.src = URL + encodeURIComponent(t);
+                            //    audio.play();
                                 //socket.close();
-                            };
-                            var http = new XMLHttpRequest();
-                            http.open('POST', '/photo?client_id=' + client_id, true);
+                            //};
+                            //var http = new XMLHttpRequest();
+                            //http.open('POST', '/photo?client_id=' + client_id, true);
                             //http.open('POST', '/photo', false);
-                            http.send();
+                            //http.send();
                             //http.send('client_id=' + client_id);
 
-                            //audio.src = URL + encodeURIComponent(t);
+                            audio.src = URL + encodeURIComponent(t);
                             //audio.src = URL + UnescapeUTF8(EscapeUTF8(t));
                             //audio.src = URL + encodeURIComponent(text);
-                            //audio.play();
+                            audio.play();
                             //setTimeout(function(){audio.play();}, 100);
                             //while (!audio.ended){}
                         }
