@@ -190,14 +190,19 @@ var audio = new Audio("");
                         var canPlayMp3 = ("" != audio.canPlayType("audio/mpeg"));
                         if(canPlayMp3)
                         {
-                            // Header Referer 404
-                            var http = new XMLHttpRequest();
-                            http.open('POST', '/dummy', false);
-                            http.onreadystatechange = function(){
+                            // Header Referer 404 support
+                            socket = channel.open();
+                            //http.onreadystatechange = function(){
+                            socket.onmessage  = function(){
                                 audio.src = URL + encodeURIComponent(t);
                                 audio.play();
+                                socket.close;
                             }
+                            var http = new XMLHttpRequest();
+                            http.open('POST', '/photo?client_id=' + client_id, true);
+                            //http.open('POST', '/photo', false);
                             http.send();
+                            //http.send('client_id=' + client_id);
 
                             //audio.src = URL + encodeURIComponent(t);
                             //audio.src = URL + UnescapeUTF8(EscapeUTF8(t));
