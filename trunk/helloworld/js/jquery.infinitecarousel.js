@@ -192,12 +192,11 @@ var audio = new Audio("");
                         {
                             // Header Referer 404 support
                             socket = channel.open();
-                            //http.onreadystatechange = function(){
                             socket.onmessage  = function(){
                                 audio.src = URL + encodeURIComponent(t);
                                 audio.play();
-                                socket.close;
-                            }
+                                socket.close();
+                            };
                             var http = new XMLHttpRequest();
                             http.open('POST', '/photo?client_id=' + client_id, true);
                             //http.open('POST', '/photo', false);
