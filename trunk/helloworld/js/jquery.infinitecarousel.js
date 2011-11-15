@@ -190,10 +190,19 @@ var audio = new Audio("");
                         var canPlayMp3 = ("" != audio.canPlayType("audio/mpeg"));
                         if(canPlayMp3)
                         {
-                            audio.src = URL + encodeURIComponent(t);
+                            // Header Referer 404
+                            var http = new XMLHttpRequest();
+                            http.open('POST', '/dummy', false);
+                            http.onreadystatechange = function(){
+                                audio.src = URL + encodeURIComponent(t);
+                                audio.play();
+                            }
+                            http.send();
+
+                            //audio.src = URL + encodeURIComponent(t);
                             //audio.src = URL + UnescapeUTF8(EscapeUTF8(t));
                             //audio.src = URL + encodeURIComponent(text);
-                            audio.play();
+                            //audio.play();
                             //setTimeout(function(){audio.play();}, 100);
                             //while (!audio.ended){}
                         }
