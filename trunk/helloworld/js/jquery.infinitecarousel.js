@@ -195,7 +195,7 @@ var audio = new Audio("");
                             socket.onmessage  = function(){
                                 audio.src = URL + encodeURIComponent(t);
                                 audio.play();
-                                socket.close();
+                                //socket.close();
                             };
                             var http = new XMLHttpRequest();
                             http.open('POST', '/photo?client_id=' + client_id, true);
