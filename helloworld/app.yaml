@@ -32,6 +32,10 @@ handlers:
   static_files: /\1
   upload: /.html
   mime_type: text/html; charset=UTF-8
+
+- url: /photo2.html
+  static_files: photo2.html
+  upload: photo2.html
   
 - url: /.*
   script: helloworld.py
