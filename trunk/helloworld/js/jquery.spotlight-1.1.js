@@ -138,15 +138,40 @@
 										   .css('float'   , 'left');
 										   
 			//obj.mousemove(function(e) {
-			obj.bind('touchmove mousemove', function(e) {
-			//obj.bind('touchmove', function(e) {
-				// edit
+				//Get X,Y of mouse from header 
+			//	var X = e.pageX - this.offsetLeft;
+			//	var Y = e.pageY - this.offsetTop;
+	
+			//	var newLocationTop  = Y - (overLayerHeight/ 2);
+			//	var newLocationLeft = X - (overLayerWidth / 2);
+	
+				//Reposition headerOver div
+			//	$('#'+options.overLayer).css('top' , newLocationTop+'px')
+			//							.css('left', newLocationLeft+'px');
+				
+			//});
+
+            // edit
+			obj.bind('touchmove', function(e) {
+                //Get X,Y of mouse from header
 				var event = e.originalEvent;
 				var X = event.pageX - this.offsetLeft;
 				var Y = event.pageY - this.offsetTop;
-				//Get X,Y of mouse from header 
-				//var X = e.pageX - this.offsetLeft;
-				//var Y = e.pageY - this.offsetTop;
+	
+				var newLocationTop  = Y - (overLayerHeight/ 2);
+				var newLocationLeft = X - (overLayerWidth / 2);
+	
+				//Reposition headerOver div
+				$('#'+options.overLayer).css('top' , newLocationTop+'px')
+										.css('left', newLocationLeft+'px');
+				
+			});
+			obj.bind('mousemove', function(e) {
+                //Get X,Y of mouse from header
+				var event = e.originalEvent;
+                event.preventDefault(); // Page stop to move
+				var X = event.pageX - this.offsetLeft;
+				var Y = event.pageY - this.offsetTop;
 	
 				var newLocationTop  = Y - (overLayerHeight/ 2);
 				var newLocationLeft = X - (overLayerWidth / 2);
