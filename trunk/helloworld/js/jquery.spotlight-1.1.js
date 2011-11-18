@@ -154,8 +154,8 @@
             // edit
 			obj.bind('touchmove', function(e) {
                 //Get X,Y of mouse from header
+                e.preventDefault(); // Page stop to move
 				var event = e.originalEvent;
-                event.preventDefault(); // Page stop to move
 				var X = event.pageX - this.offsetLeft;
 				var Y = event.pageY - this.offsetTop;
 	
