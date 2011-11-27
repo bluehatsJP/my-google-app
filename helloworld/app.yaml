@@ -37,7 +37,7 @@ handlers:
   static_files: photo2.html
   upload: photo2.html
 
-- url: /cookingSearch
+- url: /cookingSearch.html
   static_files: cookingSearch.html
   upload: cookingSearch.html
 
