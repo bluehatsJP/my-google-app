@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>あれいつ作ったっけ？</title>
+	<style type="text/css">
+	div.bubble#b1 {
+		float: left;
+		margin: 30px;
+		border-left: 10px solid #ff0080;
+		border-bottom: 10px solid transparent;
+		-border-bottom-color: white;
+	}
+	div.bubble#b1 div.body {
+		float: left;
+		padding: 10px 20px;
+		margin: 0 0 0 -30px;
+		border-radius: 10px;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		background: #ff0080;
+		font: bold 25px/1.2 "Gill Sans", "Trebuchet MS", sans-serif;
+		text-align: center;
+		color: white;
+		-position: relative;
+	}
+	</style>
+</head>
+<body>
+	<div class="bubble" id="b1">
+		<div class="body">
+			<form name="form1">
+				<input value="" title="検索" size="41" type="text" autocomplete="off" id="txtS" name="query" maxlength="2048"/>
+				<label for="txtS">いつ作ったっけ？</label>
+				<br/>
+				<label><input type="radio" name="radioS" value="1">1ケ月以内</label>
+				<label><input type="radio" name="radioS" value="3">3ケ月以内</label>
+				<label><input type="radio" name="radioS" value="6">6ケ月以内</label>
+				<br/>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
