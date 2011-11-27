@@ -36,6 +36,10 @@ handlers:
 - url: /photo2.html
   static_files: photo2.html
   upload: photo2.html
-  
+
+- url: /cookingSearch
+  static_files: cookingSearch.html
+  upload: cookingSearch.html
+
 - url: /.*
   script: helloworld.py
