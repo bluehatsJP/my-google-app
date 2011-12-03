@@ -2,9 +2,9 @@
 import htmlentitydefs
 import re
 
-# å®Ÿä½“å‚ç…§&æ–‡å­—å‚ç…§ã‚’é€šå¸¸ã®æ–‡å­—ã«æˆ»ã™
+# À‘ÌQÆ&•¶šQÆ‚ğ’Êí‚Ì•¶š‚É–ß‚·
 def htmlentity2unicode(text):
-    # æ­£è¦è¡¨ç¾ã®ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«
+    # ³‹K•\Œ»‚ÌƒRƒ“ƒpƒCƒ‹
     reference_regex = re.compile(u'&(#x?[0-9a-f]+|[a-z]);',re.IGNORECASE)
     num16_regex = re.compile(u'#x\d+',re.IGNORECASE)
     num10_regex = re.compile(u'#\d+',re.IGNORECASE)
@@ -12,7 +12,7 @@ def htmlentity2unicode(text):
     result = u''
     i = 0
     while True:
-        # å®Ÿä½“å‚ç…§oræ–‡å­—å‚ç…§ã‚’è¦‹ã¤ã‘ã‚‹
+        # À‘ÌQÆor•¶šQÆ‚ğŒ©‚Â‚¯‚é
         match = reference_regex.search(text,i)
         if match is None:
             result += text[i:]
@@ -21,15 +21,15 @@ def htmlentity2unicode(text):
         i = match.end()
         name = match.group(1)
 
-        # å®Ÿä½“å‚ç…§
+        # À‘ÌQÆ
         if name in htmlentitydefs.name2codepoint.keys():
             result += unichr(htmlentitydefs.name2codepoint[name])
-        # æ–‡å­—å‚ç…§
+        # •¶šQÆ
         elif num16_regex.match(name):
-            # 16é€²æ•°
+            # 16i”
             result += unichr(int(u'0' + name[1:],16))
         elif num10_regex.match(name):
-            # 10é€²æ•°
+            # 10i”
             result += unichr(int(name[1:]))
 
     return result
