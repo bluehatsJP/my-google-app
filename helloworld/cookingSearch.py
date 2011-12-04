@@ -21,7 +21,7 @@ for div in divlist:
         if div['class'] == 'post-body entry-content':
                     divlist2.append(div)
     except KeyError:
-        print 'KeyError'
+        print 'KeyError_div class post-body entry-content'
 # h3タグの要素を取得
 h3s = soup.findAll('h3')
 # 必要なdivタグの内容のみを抽出
@@ -31,7 +31,7 @@ for h3 in h3s:
 	if h3['class'] == 'post-title entry-title':
     	    h3s2.append(h3)
     except KeyError:
-        print 'KeyError'
+        print 'KeyError_h3 class post-title entry-title'
 
 text = divs2[0].getText()
 title = print h3s2[0].findAll('a')[0].text
