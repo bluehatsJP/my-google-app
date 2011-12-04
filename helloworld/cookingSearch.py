@@ -1,38 +1,58 @@
-ï»¿import urllib2
+import urllib2
 import time
 from BeautifulSoup import BeautifulSoup
 from htmlentity2unicode import htmlentity2unicode as html2uni
 
-# ç¾åœ¨æ—¥æ™‚å–å¾—
-today = time.localtime()
-# ç¾åœ¨æ—¥æ™‚ã‹ã‚‰å¹´æœˆã‚’å–å¾—
-# URLã«å–å¾—ã—ãŸå¹´æœˆã‚’åŸ‹ã‚è¾¼ã¿
-urltext = 'http://wifeshomecooking.blogspot.com/%04d_%02d_01_archive.html' % (today.tm_year,today.tm_mon)
-# URLã«æ¥ç¶šã—ã€htmlã‚’å–å¾—
-openurl = urllib2.urlopen(urltext)
-html = openurl.read()
-# BeautifulSoupã§divã‚¿ã‚°ã®è¦ç´ ã‚’å–å¾—
-soup = BeautifulSoup(html)
-divlist = soup.findAll('div')
-# å¿…è¦ãªdivã‚¿ã‚°ã®å†…å®¹ã®ã¿ã‚’æŠ½å‡º
-divlist2 = []
-for div in divlist:
-    try:
-        if div['class'] == 'post-body entry-content':
-                    divlist2.append(div)
-    except KeyError:
-        print 'KeyError_div class post-body entry-content'
-# h3ã‚¿ã‚°ã®è¦ç´ ã‚’å–å¾—
-h3s = soup.findAll('h3')
-# å¿…è¦ãªdivã‚¿ã‚°ã®å†…å®¹ã®ã¿ã‚’æŠ½å‡º
-h3s2 = []
-for h3 in h3s:
-    try:
-	if h3['class'] == 'post-title entry-title':
-    	    h3s2.append(h3)
-    except KeyError:
-        print 'KeyError_h3 class post-title entry-title'
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp.util import run_wsgi_app
+from google.appengine.ext.webapp import template
+from django.utils import simplejson
 
-text = divs2[0].getText()
-title = print h3s2[0].findAll('a')[0].text
-url = h3s2[0].findAll('a')[0]['href']
+class RPCHandler(webapp.RequestHandler):
+    def get(self):
+        # ƒŠƒNƒGƒXƒgƒpƒ‰ƒ[ƒ^æ“¾
+        query = simplejson.loads(self.request.get('query'))
+        monRange = simplejson.loads(self.request.get('monRange'))
+        # Œ»İ“úæ“¾
+        today = time.localtime()
+        # Œ»İ“ú‚©‚ç”NŒ‚ğæ“¾
+        # URL‚Éæ“¾‚µ‚½”NŒ‚ğ–„‚ß‚İ
+        urltext = 'http://wifeshomecooking.blogspot.com/%04d_%02d_01_archive.html' % (today.tm_year,today.tm_mon)
+        # URL‚ÉÚ‘±‚µAhtml‚ğæ“¾
+        openurl = urllib2.urlopen(urltext)
+        html = openurl.read()
+        # BeautifulSoup‚Ådivƒ^ƒO‚Ì—v‘f‚ğæ“¾
+        soup = BeautifulSoup(html)
+        divlist = soup.findAll('div')
+        # •K—v‚Èdivƒ^ƒO‚Ì“à—e‚Ì‚İ‚ğ’Šo
+        divlist2 = []
+        for div in divlist:
+            try:
+                if div['class'] == 'post-body entry-content':
+                            divlist2.append(div)
+            except KeyError:
+                print 'KeyError_div class post-body entry-content'
+        # h3ƒ^ƒO‚Ì—v‘f‚ğæ“¾
+        h3s = soup.findAll('h3')
+        # •K—v‚Èdivƒ^ƒO‚Ì“à—e‚Ì‚İ‚ğ’Šo
+        h3s2 = []
+        for h3 in h3s:
+            try:
+                if h3['class'] == 'post-title entry-title':
+                    h3s2.append(h3)
+            except KeyError:
+                print 'KeyError_h3 class post-title entry-title'
+
+        text = divs2[0].getText()
+        title = print h3s2[0].findAll('a')[0].text
+        url = h3s2[0].findAll('a')[0]['href']
+
+application = webapp.WSGIApplication(
+                                    [('/cookingSearch',RPCHandler)],
+                                    debug=True)
+
+def main():
+    run_wsgi_app(application)
+
+if __name__ == "__main__":
+    main()
