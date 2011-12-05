@@ -50,13 +50,13 @@ class RPCHandler(webapp.RequestHandler):
             except KeyError:
                 print 'KeyError_div class post-body entry-content'
         # h3タグの要素を取得
-        h3s = soup.findAll('h3')
+        h3list = soup.findAll('h3')
         # 必要なdivタグの内容のみを抽出
-        h3s2 = []
-        for h3 in h3s:
+        h3list2 = []
+        for h3 in h3list:
             try:
                 if h3['class'] == 'post-title entry-title':
-                    h3s2.append(h3)
+                    h3list2.append(h3)
             except KeyError:
                 print 'KeyError_h3 class post-title entry-title'
 
