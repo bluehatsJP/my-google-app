@@ -46,12 +46,15 @@ def _cookingSearch(purltext,pquery,presults):
     divlist = soup.findAll('div')
     # 必要なdivタグの内容のみを抽出
     divlist2 = []
+    errorMessages = []
     for div in divlist:
         try:
             if div['class'] == 'post-body entry-content':
                         divlist2.append(div)
         except KeyError:
-            print 'KeyError_div class post-body entry-content'
+            #print 'KeyError_div class post-body entry-content'
+            pass
+
     # h3タグの要素を取得
     h3list = soup.findAll('h3')
     # 必要なdivタグの内容のみを抽出
@@ -61,7 +64,8 @@ def _cookingSearch(purltext,pquery,presults):
             if h3['class'] == 'post-title entry-title':
                 h3list2.append(h3)
         except KeyError:
-            print 'KeyError_h3 class post-title entry-title'
+            #print 'KeyError_h3 class post-title entry-title'
+            pass
 
     # queryにマッチするものを結果に追加
     for i in range(len(divlist2)):
