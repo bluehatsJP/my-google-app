@@ -1,3 +1,4 @@
+#!-*- coding:utf-8 -*-
 import urllib2
 import time
 from BeautifulSoup import BeautifulSoup
@@ -10,19 +11,21 @@ from django.utils import simplejson
 
 class RPCHandler(webapp.RequestHandler):
     def get(self):
-        # ƒŠƒNƒGƒXƒgƒpƒ‰ƒ[ƒ^Žæ“¾
-        query = simplejson.loads(self.request.get('query'))
-        monRange = simplejson.loads(self.request.get('monRange'))
-        # Œ»Ý“úŽžŽæ“¾
+        # ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿å–å¾—
+        #query = simplejson.loads(self.request.get('query'))
+        #monRange = simplejson.loads(self.request.get('monRange'))
+        query = self.request.get('query')
+        monRange = self.request.get('monRange')
+        # ç¾åœ¨æ—¥æ™‚å–å¾—
         today = time.localtime()
-        # Œ»Ý“úŽž‚©‚ç”NŒŽ‚ðŽæ“¾
-        # URL‚ÉŽæ“¾‚µ‚½”NŒŽ‚ð–„‚ßž‚Ý
+        # ç¾åœ¨æ—¥æ™‚ã‹ã‚‰å¹´æœˆã‚’å–å¾—
+        # URLã«å–å¾—ã—ãŸå¹´æœˆã‚’åŸ‹ã‚è¾¼ã¿
         urltext = 'http://wifeshomecooking.blogspot.com/%04d_%02d_01_archive.html' % (today.tm_year,today.tm_mon)
-        # Œ‹‰ÊƒŠƒXƒg
+        # çµæžœãƒªã‚¹ãƒˆ
         results = []
         _cookingSearch(urltext,query,results)
 
-        # ƒŠƒNƒGƒXƒgƒpƒ‰ƒ[ƒ^'monRange'‚Ì”ÍˆÍ‚ÅqueryŒŸõ
+        # ãƒªã‚¯ã‚¨ã‚¹ãƒˆãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿'monRange'ã®ç¯„å›²ã§queryæ¤œç´¢
         for i in range(int(monRange)):
             year = today.tm_year
             mon = today.tm_mon - (i+1)
@@ -34,41 +37,41 @@ class RPCHandler(webapp.RequestHandler):
 
         self.response.out.write(simplejson.dumps(results))
 
-    def _cookingSearch(purltext,pquery,presults):
-        # URL‚ÉÚ‘±‚µAhtml‚ðŽæ“¾
-        openurl = urllib2.urlopen(purltext)
-        html = openurl.read()
-        # BeautifulSoup‚Ådivƒ^ƒO‚Ì—v‘f‚ðŽæ“¾
-        soup = BeautifulSoup(html)
-        divlist = soup.findAll('div')
-        # •K—v‚Èdivƒ^ƒO‚Ì“à—e‚Ì‚Ý‚ð’Šo
-        divlist2 = []
-        for div in divlist:
-            try:
-                if div['class'] == 'post-body entry-content':
-                            divlist2.append(div)
-            except KeyError:
-                print 'KeyError_div class post-body entry-content'
-        # h3ƒ^ƒO‚Ì—v‘f‚ðŽæ“¾
-        h3list = soup.findAll('h3')
-        # •K—v‚Èdivƒ^ƒO‚Ì“à—e‚Ì‚Ý‚ð’Šo
-        h3list2 = []
-        for h3 in h3list:
-            try:
-                if h3['class'] == 'post-title entry-title':
-                    h3list2.append(h3)
-            except KeyError:
-                print 'KeyError_h3 class post-title entry-title'
+def _cookingSearch(purltext,pquery,presults):
+    # URLã«æŽ¥ç¶šã—ã€htmlã‚’å–å¾—
+    openurl = urllib2.urlopen(purltext)
+    html = openurl.read()
+    # BeautifulSoupã§divã‚¿ã‚°ã®è¦ç´ ã‚’å–å¾—
+    soup = BeautifulSoup(html)
+    divlist = soup.findAll('div')
+    # å¿…è¦ãªdivã‚¿ã‚°ã®å†…å®¹ã®ã¿ã‚’æŠ½å‡º
+    divlist2 = []
+    for div in divlist:
+        try:
+            if div['class'] == 'post-body entry-content':
+                        divlist2.append(div)
+        except KeyError:
+            print 'KeyError_div class post-body entry-content'
+    # h3ã‚¿ã‚°ã®è¦ç´ ã‚’å–å¾—
+    h3list = soup.findAll('h3')
+    # å¿…è¦ãªdivã‚¿ã‚°ã®å†…å®¹ã®ã¿ã‚’æŠ½å‡º
+    h3list2 = []
+    for h3 in h3list:
+        try:
+            if h3['class'] == 'post-title entry-title':
+                h3list2.append(h3)
+        except KeyError:
+            print 'KeyError_h3 class post-title entry-title'
 
-        # query‚Éƒ}ƒbƒ`‚·‚é‚à‚Ì‚ðŒ‹‰Ê‚É’Ç‰Á
-        for i in range(len(divs2)):
-            text = html2uni(divs2[i].getText())
-            title = print h3s2[i].findAll('a')[0].text
-            url = h3s2[i].findAll('a')[0]['href']
+    # queryã«ãƒžãƒƒãƒã™ã‚‹ã‚‚ã®ã‚’çµæžœã«è¿½åŠ 
+    for i in range(len(divlist2)):
+        text = html2uni(divlist2[i].getText())
+        title = h3list2[i].findAll('a')[0].text
+        url = h3list2[i].findAll('a')[0]['href']
 
-            if text.find(pquery) >= 0:
-                result = {'text':text,'title':title,'url':url}
-                presults.append(result)
+        if text.find(pquery) >= 0:
+            result = {'text':text,'title':title,'url':url}
+            presults.append(result)
 
 application = webapp.WSGIApplication(
                                     [('/cookingSearch',RPCHandler)],
