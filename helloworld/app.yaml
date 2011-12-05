@@ -41,5 +41,8 @@ handlers:
   static_files: cookingSearch.html
   upload: cookingSearch.html
 
+- url: /cookingSearch
+  script: cookingSearch.py
+
 - url: /.*
   script: helloworld.py
