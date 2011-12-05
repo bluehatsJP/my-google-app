@@ -18,8 +18,25 @@ class RPCHandler(webapp.RequestHandler):
         # 現在日時から年月を取得
         # URLに取得した年月を埋め込み
         urltext = 'http://wifeshomecooking.blogspot.com/%04d_%02d_01_archive.html' % (today.tm_year,today.tm_mon)
+        # 結果リスト
+        results = []
+        _cookingSearch(urltext,query,results)
+
+        # リクエストパラメータ'monRange'の範囲でquery検索
+        for i in range(int(monRange)):
+            year = today.tm_year
+            mon = today.tm_mon - (i+1)
+            if mon <= 0:
+                year -= 1
+                mon += 12
+            urltext = 'http://wifeshomecooking.blogspot.com/%04d_%02d_01_archive.html' % (year,mon)
+            _cookingSearch(urltext,query,results)
+
+        self.response.out.write(simplejson.dumps(results))
+
+    def _cookingSearch(purltext,pquery,presults):
         # URLに接続し、htmlを取得
-        openurl = urllib2.urlopen(urltext)
+        openurl = urllib2.urlopen(purltext)
         html = openurl.read()
         # BeautifulSoupでdivタグの要素を取得
         soup = BeautifulSoup(html)
@@ -43,18 +60,15 @@ class RPCHandler(webapp.RequestHandler):
             except KeyError:
                 print 'KeyError_h3 class post-title entry-title'
 
-        text = divs2[0].getText()
-        title = print h3s2[0].findAll('a')[0].text
-        url = h3s2[0].findAll('a')[0]['href']
+        # queryにマッチするものを結果に追加
+        for i in range(len(divs2)):
+            text = html2uni(divs2[i].getText())
+            title = print h3s2[i].findAll('a')[0].text
+            url = h3s2[i].findAll('a')[0]['href']
 
-        # リクエストパラメータ'monRange'の範囲でquery検索
-        for i in range(int(monRange)):
-            year = today.tm_year
-            mon = today.tm_mon - (i+1)
-            if mon <= 0:
-                year -= 1
-                mon += 12
-            urltext = 'http://wifeshomecooking.blogspot.com/%04d_%02d_01_archive.html' % (year,mon)
+            if text.find(pquery) >= 0:
+                result = {'text':text,'title':title,'url':url}
+                presults.append(result)
 
 application = webapp.WSGIApplication(
                                     [('/cookingSearch',RPCHandler)],
