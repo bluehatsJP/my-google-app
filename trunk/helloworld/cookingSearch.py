@@ -47,6 +47,15 @@ class RPCHandler(webapp.RequestHandler):
         title = print h3s2[0].findAll('a')[0].text
         url = h3s2[0].findAll('a')[0]['href']
 
+        # リクエストパラメータ'monRange'の範囲でquery検索
+        for i in range(int(monRange)):
+            year = today.tm_year
+            mon = today.tm_mon - (i+1)
+            if mon <= 0:
+                year -= 1
+                mon += 12
+            urltext = 'http://wifeshomecooking.blogspot.com/%04d_%02d_01_archive.html' % (year,mon)
+
 application = webapp.WSGIApplication(
                                     [('/cookingSearch',RPCHandler)],
                                     debug=True)
