@@ -18,7 +18,7 @@
 					$('<div>',{id:'results'}).appendTo('#main');
 					$('<ul>',{id:'result'+i,style:'list-style-type:none'}).appendTo('#results');
 					$('<li>',{id:'resultT'+i}).appendTo('#result' + i);
-					$('<a>',{href:data[i].url',html:data[i].title}).appendTo('#resultT' + i);
+					$('<a>',{href:data[i].url,html:data[i].title}).appendTo('#resultT' + i);
 					$('<li>',{id:'resultS'+i,html:data[i].text}).appendTo('#result' + i);
 				}
 			});
