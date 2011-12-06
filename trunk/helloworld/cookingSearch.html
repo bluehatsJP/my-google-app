@@ -11,6 +11,16 @@
 		$.get("/cookingSearch",{query:$("#query").val(),monRange:$('input[name="monRange"]:checked').val()},
 			function(data) {
 				alert("data: " + data);
+				for (var i in data) {
+					if (document.getElementById("results") != null){
+	                	$('#results').remove();
+	            	}
+					$('<div>',{id:'results'}).appendTo('#main');
+					$('<ul>',{id:'result'+i,style:'list-style-type:none'}).appendTo('#results');
+					$('<li>',{id:'resultT'+i}).appendTo('#result' + i);
+					$('<a>',{href:data[i].url',html:data[i].title}).appendTo('#resultT' + i);
+					$('<li>',{id:'resultS'+i,html:data[i].text}).appendTo('#result' + i);
+				}
 			});
 	}
 	</script>
@@ -44,6 +54,7 @@
 	</style>
 </head>
 <body>
+<div id="main">
 	<div class="bubble" id="b1">
 		<div class="body">
 			<form name="form1" action="javascript:cookingSearch();">
@@ -58,35 +69,20 @@
 		</div>
 	</div>
 	<hr class="style1">
-	<a href="">11/25 お弁当</a><br/>
-	<label>
-	卵とそぼろの二色丼
-
-	じゃことほうれん草の和え物
-
-	魚肉ソーセージ
-
-	かにかまともやしのナムル
-
-	今日も完食♪
-	</label><br/>
-	<a href="">11/24 お弁当</a><br/>
-	<label>
-	豚肉の唐揚げ
-
-	ほうれん草のお浸し
-
-	みかん
-
-	唐揚げのタルタル最高ですｄ(｡ゝω･´）
-	</label><br/>
-	<a href="">11/23 夕食</a><br/>
-	<label>
-	ハヤシライス
-
-	サラダ
-
-	ハヤシライス、トマトの酸味とのバランスぐ?♪ ｄ(*-o-)
-	</label><br/>
+	<div id="results">
+		<ul style="list-style-type:none">
+			<li><a href="">11/25 お弁当</a></li>
+			<li>卵とそぼろの二色丼じゃことほうれん草の和え物魚肉ソーセージかにかまともやしのナムル今日も完食♪</li>
+		</ul>
+		<ul style="list-style-type:none">
+			<li><a href="">11/24 お弁当</a></li>
+			<li>豚肉の唐揚げほうれん草のお浸しみかん唐揚げのタルタル最高ですｄ(｡ゝω･´）</li>
+		</ul>
+		<ul style="list-style-type:none">
+			<li><a href="">11/23 夕食</a></li>
+			<li>ハヤシライスサラダハヤシライス、トマトの酸味とのバランスぐ?♪ ｄ(*-o-)</li>
+		</ul>
+	</div>
+</div>
 </body>
 </html>
