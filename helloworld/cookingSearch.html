@@ -7,6 +7,7 @@
 	<script type="text/javascript">
 	function cookingSearch() {
 		alert("start");
+        $('input[name="monRange"]:checked').focus();
 		$.get("/cookingSearch",{query:$("#query").val(),monRange:$('input[name="monRange"]:checked').val()},
 			function(data) {
 				alert("data: " + data);
