@@ -4,6 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>あれいつ作ったっけ？</title>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.activity-indicator-1.0.0.js"></script>
 	<script type="text/javascript">
 	var xhr;
 	function cookingSearch() {
@@ -13,6 +14,11 @@
 				//alert("abort");
 				xhr.abort();
 			}
+			if (document.getElementById("loading") != null){
+				$('#loading').remove();
+			}
+			$('<div>',{id:'loading'}).appendTo('#main');
+			$('#loading').activity();
 			$('input[name="monRange"]:checked').focus();
 			xhr = $.get("/cookingSearch",{query:$("#query").val(),monRange:$('input[name="monRange"]:checked').val()},
 				function(data) {
@@ -20,6 +26,9 @@
 					var results = JSON.parse(data);
 					if (document.getElementById("results") != null){
 						$('#results').remove();
+					}
+					if (document.getElementById("loading") != null){
+						$('#loading').remove();
 					}
 					for (var i in results) {
 						//alert("results[" + i + "].url:" + results[i].url);
