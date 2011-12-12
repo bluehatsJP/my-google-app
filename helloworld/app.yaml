@@ -37,6 +37,10 @@ handlers:
   static_files: photo2.html
   upload: photo2.html
 
+- url: /htmlSizeChecker.html
+  static_files: htmlSizeChecker.html
+  upload: htmlSizeChecker.html
+
 - url: /cookingSearch.html
   static_files: cookingSearch.html
   upload: cookingSearch.html
