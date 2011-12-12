@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>HTML SIZE CHECKER</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+  <script type="text/javascript">
+	function sizechange() {
+		if ($("#bigwidth").val()) {
+			$("#big").css("width",$("#bigwidth").val());
+		}
+		if ($("#bigheight").val()) {
+			$("#big").css("height",$("#bigheight").val());
+		}
+
+		if ($("#smallwidth").val()) {
+			$("#small").css("width",$("#smallwidth").val());
+		}
+		if ($("#smallheight").val()) {
+			$("#small").css("height",$("#smallheight").val());
+		}
+	}
+  </script>
+</head>
+<body>
+<div id ="big" style="width:960px;height:630px;background-color:#87cefa;">
+	<div id="small" style="width:339px;height:336px;background-color:#ffa500;">
+	</div>
+</div>
+<form>
+	B_width:<input type="text" id="bigwidth"/>px
+	B_height:<input type="text" id="bigheight"/>px
+	<br/>
+	S_width:<input type="text" id="smallwidth"/>px
+	S_height:<input type="text" id="smallheight"/>px
+	<br/>
+	<input type="button" value="Size Change" onclick="sizechange();" />
+</form>
+</html>
+</body>
