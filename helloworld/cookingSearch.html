@@ -37,7 +37,7 @@
 						$('<div>',{id:'results'}).appendTo('#main');
 						$('<ul>',{id:'result'+i,style:'list-style-type:none'}).appendTo('#results');
 						$('<li>',{id:'resultT'+i}).appendTo('#result' + i);
-						$('<a>',{href:results[i].url,html:results[i].title}).appendTo('#resultT' + i);
+						$('<a>',{href:results[i].url,target:'_blank',html:results[i].title}).appendTo('#resultT' + i);
 						$('<li>',{id:'resultS'+i,html:results[i].text}).appendTo('#result' + i);
 					}
 				});
