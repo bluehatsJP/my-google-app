@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Rino's Drawing</title>
+	<script type="text/javascript">
+	blush = false;
+
+	function onLoad() {
+		var convasDiv = document.getElementById("main");
+		var myCanvas = document.createElement("canvas");
+		myCanvas.width = 960;
+		myCanvas.height = 576;
+		convasDiv.appendChild(myCanvas);
+
+		var ctx = myCanvas.getContext('2d');
+		document.addEventListener("mousemove",function(event) {
+			mouseX = event.pageX;
+			mouseY = event.pageY;
+			if(blush) {
+				ctx.beginPath();
+				ctx.moveTo(x,y);
+				ctx.lineTo(mouseX,mouseY);
+				ctx.stroke();
+			}
+			x = mouseX;
+			y = mouseY;
+		});
+		document.addEventListener("mousedown",function() {
+			blush = true;
+		});
+		document.addEventListener("mouseup",function() {
+			blush = false;
+		});
+
+		document.addEventListener("touchmove",function(event) {
+			mouseX = event.touches[0].pageX;
+			mouseY = event.touches[0].pageY;
+			if(blush) {
+				ctx.beginPath();
+				ctx.moveTo(x,y);
+				ctx.lineTo(mouseX,mouseY);
+				ctx.stroke();
+			}
+			x = mouseX;
+			y = mouseY;
+			event.preventDefault();
+		},false);
+		document.addEventListener("touchstart",function(event) {
+			blush = true;
+			x = event.touches[0].pageX;
+			y = event.touches[0].pageY;
+		},false);
+		document.addEventListener("touchend",function() {
+			blush = false;
+		},false);
+	}
+	</script>
+</head>
+<body onLoad = "onLoad();">
+<div id="main">
+</div>
+</body>
+</html>

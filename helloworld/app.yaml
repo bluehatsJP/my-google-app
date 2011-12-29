@@ -48,5 +48,9 @@ handlers:
 - url: /cookingSearch
   script: cookingSearch.py
 
+- url: /drawing.html
+  static_files: drawing.html
+  upload: drawing.html
+
 - url: /.*
   script: helloworld.py
