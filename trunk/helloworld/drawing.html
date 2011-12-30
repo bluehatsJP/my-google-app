@@ -65,11 +65,18 @@
 		var temp = "<img src=\"" + strDataURI + "\" alt=\"\" width=\"310px\" />";
 		window.open("data:text/html;base64," + window.btoa(temp));
 	}
+
+	function mailCanvas() {
+		var strDataURI = myCanvas.toDataURL("image/jpeg");
+		var temp = "<img src=\"" + strDataURI + "\" alt=\"\" width=\"310px\" />";
+		location.href = "mailto:?body=" + temp;
+	}
 	</script>
 </head>
 <body onLoad = "onLoad();">
 <div id="main">
 	<input onclick="saveCanvas();" type="button" value="SAVE" />
+	<input onclick="mailCanvas();" type="button" value="MAIL" />
 </div>
 </body>
 </html>
