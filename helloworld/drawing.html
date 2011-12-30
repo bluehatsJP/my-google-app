@@ -5,18 +5,22 @@
 	<title>Rino's Drawing</title>
 	<script type="text/javascript">
 	blush = false;
+ 	var myCanvas;
 
 	function onLoad() {
 		var convasDiv = document.getElementById("main");
-		var myCanvas = document.createElement("canvas");
+		myCanvas = document.createElement("canvas");
 		myCanvas.width = 960;
 		myCanvas.height = 576;
 		convasDiv.appendChild(myCanvas);
 
 		var ctx = myCanvas.getContext('2d');
+
+		canvasRect = myCanvas.getBoundingClientRect();
+
 		document.addEventListener("mousemove",function(event) {
-			mouseX = event.pageX;
-			mouseY = event.pageY;
+			mouseX = event.pageX - canvasRect.left;
+			mouseY = event.pageY - canvasRect.top;
 			if(blush) {
 				ctx.beginPath();
 				ctx.moveTo(x,y);
@@ -34,8 +38,8 @@
 		});
 
 		document.addEventListener("touchmove",function(event) {
-			mouseX = event.touches[0].pageX;
-			mouseY = event.touches[0].pageY;
+			mouseX = event.touches[0].pageX - canvasRect.left;
+			mouseY = event.touches[0].pageY - canvasRect.top;
 			if(blush) {
 				ctx.beginPath();
 				ctx.moveTo(x,y);
@@ -48,17 +52,24 @@
 		},false);
 		document.addEventListener("touchstart",function(event) {
 			blush = true;
-			x = event.touches[0].pageX;
-			y = event.touches[0].pageY;
+			x = event.touches[0].pageX - canvasRect.left;
+			y = event.touches[0].pageY - canvasRect.top;
 		},false);
 		document.addEventListener("touchend",function() {
 			blush = false;
 		},false);
 	}
+
+	function saveCanvas() {
+		var strDataURI = myCanvas.toDataURL("image/jpeg");
+		var temp = "<img src=\"" + strDataURI + "\" alt=\"\" width=\"310px\" />";
+		window.open("data:text/html;base64," + window.btoa(temp));
+	}
 	</script>
 </head>
 <body onLoad = "onLoad();">
 <div id="main">
+	<input onclick="saveCanvas();" type="button" value="SAVE" />
 </div>
 </body>
 </html>
