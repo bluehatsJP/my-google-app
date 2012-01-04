@@ -156,8 +156,10 @@
                 //Get X,Y of mouse from header
                 e.preventDefault(); // Page stop to move
 				var event = e.originalEvent;
-				var X = event.pageX - this.offsetLeft;
-				var Y = event.pageY - this.offsetTop;
+				//var X = event.pageX - this.offsetLeft;
+				//var Y = event.pageY - this.offsetTop;
+				var X = event.touches[0].pageX - this.offsetLeft;
+				var Y = event.touches[0].pageY - this.offsetTop;
 	
 				var newLocationTop  = Y - (overLayerHeight/ 2);
 				var newLocationLeft = X - (overLayerWidth / 2);
