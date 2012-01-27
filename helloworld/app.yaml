@@ -45,6 +45,10 @@ handlers:
   static_files: cookingSearch.html
   upload: cookingSearch.html
 
+- url: /cookingSearch.xml
+  static_files: cookingSearch.xml
+  upload: cookingSearch.xml
+
 - url: /cookingSearch
   script: cookingSearch.py
 

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?> 
+
+<Module>
+  <ModulePrefs title="あれいつ作ったっけ？"/> 
+  <Content type="html">
+  <![CDATA[
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<!--<script type="text/javascript" src="/js/jquery.activity-indicator-1.0.0.js"></script>-->
+	<script type="text/javascript">
+	var xhr;
+	function cookingSearch() {
+		if ($("#query").val() != "") {
+			//alert("start");
+			if (xhr != null) {
+				//alert("abort");
+				xhr.abort();
+			}
+			//if (document.getElementById("loading") != null){
+			//	$('#loading').remove();
+			//}
+			//$('<div>',{id:'loading'}).appendTo('#main');
+			//$('#loading').activity();
+			$('input[name="monRange"]:checked').focus();
+			xhr = $.get("http://bluehatspractice.appspot.com/cookingSearch",{query:$("#query").val(),monRange:$('input[name="monRange"]:checked').val()},
+				function(data) {
+					//alert("data: " + data);
+					var results = JSON.parse(data);
+					if (document.getElementById("results") != null){
+						$('#results').remove();
+					}
+					//if (document.getElementById("loading") != null){
+					//	$('#loading').remove();
+					//}
+					for (var i in results) {
+						//alert("results[" + i + "].url:" + results[i].url);
+						//alert("results[" + i + "].title:" + results[i].title);
+						//alert("results[" + i + "].text:" + results[i].text);
+						$('<div>',{id:'results'}).appendTo('#main');
+						$('<ul>',{id:'result'+i,style:'list-style-type:none'}).appendTo('#results');
+						$('<li>',{id:'resultT'+i}).appendTo('#result' + i);
+						$('<a>',{href:results[i].url,target:'_blank',html:results[i].title}).appendTo('#resultT' + i);
+						$('<li>',{id:'resultS'+i,html:results[i].text}).appendTo('#result' + i);
+					}
+				});
+		}
+	}
+	</script>
+<div id="main">
+	<div>
+		<div class="body">
+			<input value="" title="検索" size="20" type="text" autocomplete="off" id="query" name="query" maxlength="2048"/><br/>
+			<label><input type="radio" name="monRange" value="1" onclick="cookingSearch();" checked>1ケ月以内</label><br/>
+			<label><input type="radio" name="monRange" value="3" onclick="cookingSearch();">3ケ月以内</label><br/>
+			<!--<label><input type="radio" name="monRange" value="6" onclick="cookingSearch();">6ケ月以内</label>-->
+			<input type="button" value="検索" onclick="cookingSearch()">
+			<br/>
+		</div>
+	</div>
+<!--<hr class="style1">-->
+</div>
+]]>
+  </Content>
+</Module>
