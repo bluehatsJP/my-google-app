@@ -35,6 +35,9 @@ class RPCHandler(webapp.RequestHandler):
             urltext = 'http://wifeshomecooking.blogspot.com/%04d_%02d_01_archive.html' % (year,mon)
             _cookingSearch(urltext,query,results)
 
+        # クロスサイト対応
+        self.response.headers['Access-Control-Allow-Origin'] = '*'
+
         self.response.out.write(simplejson.dumps(results))
 
 def _cookingSearch(purltext,pquery,presults):
