@@ -60,13 +60,13 @@
 	</style>
 <div id="main" class="style1">
 	<div>
-		<div>
+		<form name="form1" action="javascript:cookingSearch();">
 			<input value="" title="検索" size="20" type="text" autocomplete="off" id="query" name="query" maxlength="2048"/>
 			<label><input type="radio" name="monRange" value="1" onclick="cookingSearch();" checked>1ケ月以内</label>
 			<label><input type="radio" name="monRange" value="3" onclick="cookingSearch();">3ケ月以内</label>
 			<!--<label><input type="radio" name="monRange" value="6" onclick="cookingSearch();">6ケ月以内</label>-->
-			<input type="button" value="検索" onclick="cookingSearch()">
-		</div>
+			<!--<input type="button" value="検索" onclick="cookingSearch()">-->
+		</form>
 	</div>
 <hr class="style1">
 </div>
