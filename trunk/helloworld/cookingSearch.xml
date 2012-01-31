@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?> 
 
 <Module>
-  <ModulePrefs title="あれいつ作ったっけ？"/> 
+  <ModulePrefs title="あれいつ作ったっけ？">
+	<Require feature="dynamic-height"/>
+  </ModulePrefs>
   <Content type="html">
   <![CDATA[
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -42,6 +44,7 @@
 						$('<a>',{href:results[i].url,target:'_blank',html:results[i].title}).appendTo('#resultT' + i);
 						$('<li>',{id:'resultS'+i,html:results[i].text}).appendTo('#result' + i);
 					}
+					gadgets.window.adjustHeight();
 				});
 		}
 	}
