@@ -17,6 +17,9 @@
 				//alert("abort");
 				xhr.abort();
 			}
+			if (document.getElementById("results") != null){
+				$('#results').remove();
+			}
 			if (document.getElementById("loading") != null){
 				$('#loading').remove();
 			}
@@ -28,9 +31,9 @@
 				function(data) {
 					//alert("data: " + data);
 					var results = JSON.parse(data);
-					if (document.getElementById("results") != null){
-						$('#results').remove();
-					}
+					//if (document.getElementById("results") != null){
+					//	$('#results').remove();
+					//}
 					if (document.getElementById("loading") != null){
 						$('#loading').remove();
 					}
