@@ -173,7 +173,7 @@ var audio = new Audio("");
 					{
                         // Read-aloud of Japanese
                         //var URL = "http://bluehatspractice.appspot.com/readingOut?tl=ja&q="; // Japanese
-                        var URL = "http://bluehatspractice.appspot.com/translate_tts?q=";  // English
+                        var URL = "http://bluehatspractice.appspot.com/translate_tts?tl=en&q=";  // English
                         //var URL = "http://translate.google.com/translate_tts?tl=ja&q=";    // Japanese
                         //var URL = "http://translate.google.com/translate_tts?q=";          // English
                         //var audio = new Audio(URL + encodeURIComponent(t));
