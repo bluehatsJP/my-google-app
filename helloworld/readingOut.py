@@ -8,8 +8,8 @@ from google.appengine.api import urlfetch
 class RPCHandler(webapp.RequestHandler):
     def get(self):
         # リクエストパラメータ取得
-        #lang = self.request.get('lang')
-        #text = self.request.get('text')
+        #lang = self.request.get('tl')
+        #text = self.request.get('q')
         #urltext = 'http://translate.google.com/translate_tts?tl=%s&q=%s' % (lang,text)
 
 		#opener = urllib2.build_opener()
