@@ -1,5 +1,5 @@
 #!-*- coding:utf-8 -*-
-import urllib2
+import urllib
 
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -8,9 +8,12 @@ from google.appengine.api import urlfetch
 class RPCHandler(webapp.RequestHandler):
     def get(self):
 		# リクエストパラメータ取得
-		lang = self.request.get('lang')
-		text = self.request.get('text')
-		urltext = 'http://translate.google.com/translate_tts?tl=%s&q=%s' % (lang,text)
+		lang = self.request.get('tl').encode('utf_8')
+		text = self.request.get('q').encode('utf_8')
+		#lang = self.request.get('tl').encode('shift_jis')
+		#text = self.request.get('q').encode('shift_jis')
+		query = urllib.urlencode({'tl':lang,'q':text})
+		urltext = 'http://translate.google.com/translate_tts?' + query
 
 		#opener = urllib2.build_opener()
 		#opener.addheaders = [('Referer','')]
@@ -20,15 +23,15 @@ class RPCHandler(webapp.RequestHandler):
 		#req.add_header('Referer','');
 		#res = urllib2.urlopen(req)
 
-		res = urlfetch.fetch(url= 'http://translate.google.com/translate_tts?q=hello',
-		#res = urlfetch.fetch(url= 'http://translate.google.com/translate_tts?tl=ja&q=こんにちわ',
-		#res = urlfetch.fetch(url=urltext,
+		res = urlfetch.fetch(url=urltext,
 							method=urlfetch.GET,
 							headers={'Referer':''})
 
-		self.response.headers["Content-Type"] = "audio/mpeg"
-		self.response.out.write(res.content)
-		#doSomethingWithResult(res)
+		if res.status_code == 200:
+			self.response.headers["Content-Type"] = "audio/mpeg"
+			self.response.out.write(res.content)
+		else:
+			self.response.out.write('error.status_code == ' + res.status_code)
 
 application = webapp.WSGIApplication(
                                     [('/readingOut',RPCHandler)],
