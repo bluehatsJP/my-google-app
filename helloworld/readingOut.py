@@ -30,6 +30,7 @@ class RPCHandler(webapp.RequestHandler):
 		if res.status_code == 200:
 			self.response.headers["Content-Type"] = "audio/mpeg"
 			self.response.out.write(res.content)
+			#self.response.out.write(res.headers['content-length'])
 		else:
 			self.response.out.write('error.status_code == ' + res.status_code)
 
