@@ -56,5 +56,8 @@ handlers:
   static_files: drawing.html
   upload: drawing.html
 
+- url: /readingOut
+  script: readingOut.py
+
 - url: /.*
   script: helloworld.py
