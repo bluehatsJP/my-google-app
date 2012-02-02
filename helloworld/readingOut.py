@@ -7,10 +7,10 @@ from google.appengine.api import urlfetch
 
 class RPCHandler(webapp.RequestHandler):
     def get(self):
-        # リクエストパラメータ取得
-        #lang = self.request.get('tl')
-        #text = self.request.get('q')
-        #urltext = 'http://translate.google.com/translate_tts?tl=%s&q=%s' % (lang,text)
+		# リクエストパラメータ取得
+		lang = self.request.get('lang')
+		text = self.request.get('text')
+		urltext = 'http://translate.google.com/translate_tts?tl=%s&q=%s' % (lang,text)
 
 		#opener = urllib2.build_opener()
 		#opener.addheaders = [('Referer','')]
@@ -21,6 +21,8 @@ class RPCHandler(webapp.RequestHandler):
 		#res = urllib2.urlopen(req)
 
 		res = urlfetch.fetch(url= 'http://translate.google.com/translate_tts?q=hello',
+		#res = urlfetch.fetch(url= 'http://translate.google.com/translate_tts?tl=ja&q=こんにちわ',
+		#res = urlfetch.fetch(url=urltext,
 							method=urlfetch.GET,
 							headers={'Referer':''})
 
