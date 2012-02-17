@@ -6,7 +6,8 @@
 	<script type="text/javascript">
 	blush = false;
  	var myCanvas;
-	var img = new Image();
+	//var img = new Image();
+	var img;
 
 	function onLoad() {
 		var convasDiv = document.getElementById("main");
@@ -62,7 +63,10 @@
 	}
 
 	function saveCanvas() {
-		img.src = myCanvas.toDataURL("image/jpeg");
+		//img.src = myCanvas.toDataURL("image/jpeg");
+		var ctx = myCanvas.getContext('2d');
+		img = ctx.getImageData(0, 0, myCanvas.width, myCanvas.height);
+
 		//var strDataURI = myCanvas.toDataURL("image/jpeg");
 		//var temp = "<img src=\"" + strDataURI + "\" alt=\"\" width=\"310px\" />";
 		//window.open("data:text/html;base64," + window.btoa(temp));
@@ -76,7 +80,8 @@
 
 	function redoCanvas() {
 		var ctx = myCanvas.getContext('2d');
-		ctx.drawImage(img, 0, 0);
+		//ctx.drawImage(img, 0, 0);
+		ctx.putImageData(img, 0, 0);
 	}
 	</script>
 </head>
