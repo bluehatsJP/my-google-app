@@ -6,6 +6,7 @@
 	<script type="text/javascript">
 	blush = false;
  	var myCanvas;
+	var img = new Image();
 
 	function onLoad() {
 		var convasDiv = document.getElementById("main");
@@ -61,9 +62,10 @@
 	}
 
 	function saveCanvas() {
-		var strDataURI = myCanvas.toDataURL("image/jpeg");
-		var temp = "<img src=\"" + strDataURI + "\" alt=\"\" width=\"310px\" />";
-		window.open("data:text/html;base64," + window.btoa(temp));
+		img.src = myCanvas.toDataURL("image/jpeg");
+		//var strDataURI = myCanvas.toDataURL("image/jpeg");
+		//var temp = "<img src=\"" + strDataURI + "\" alt=\"\" width=\"310px\" />";
+		//window.open("data:text/html;base64," + window.btoa(temp));
 	}
 
 	function mailCanvas() {
@@ -71,11 +73,17 @@
 		var temp = "<img src=\"" + strDataURI + "\" alt=\"\" width=\"310px\" />";
 		location.href = "mailto:?body=" + temp;
 	}
+
+	function redoCanvas() {
+		var ctx = myCanvas.getContext('2d');
+		ctx.drawImage(img, 0, 0);
+	}
 	</script>
 </head>
 <body onLoad = "onLoad();">
 <div id="main">
 	<input onclick="saveCanvas();" type="button" value="SAVE" />
+	<input onclick="redoCanvas();" type="button" value="REDO" />
 	<input onclick="mailCanvas();" type="button" value="MAIL" />
 </div>
 </body>
