@@ -5,6 +5,18 @@
 	<title>Rino's Drawing</title>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script type="text/javascript" src="/_ah/channel/jsapi"></script>
+	<style type="">
+	.div1 {
+		background: #EEE;
+		border:2px solid #999; 
+		padding: 10px;
+		margin-bottom:10px;
+		text-align: center;
+		border-radius: 10px;        	/* CSS3ëêàƒ */  
+		-webkit-border-radius: 10px;    /* Safari,Google Chromeóp */  
+		-moz-border-radius: 10px;   	/* Firefoxóp */ 
+	}
+	</style>
 </head>
 <body onLoad = "onLoad();">
 	<script type="text/javascript">
@@ -165,10 +177,12 @@
 		//ctx.putImageData(img, 0, 0);
 	}
 	</script>
-	<div id="main">
+	<div id="main" class="div1">
+<!--
 		<input onclick="saveCanvas();" type="button" value="SAVE" />
 		<input onclick="redoCanvas();" type="button" value="REDO" />
 		<input onclick="mailCanvas();" type="button" value="MAIL" />
+-->
 	</div>
 </body>
 </html>
