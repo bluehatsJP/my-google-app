@@ -1,13 +1,27 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Rino's Drawing</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/_ah/channel/jsapi"></script>
+</head>
+<body onLoad = "onLoad();">
 	<script type="text/javascript">
 	blush = false;
  	var myCanvas;
 	var img = new Image();
 	//var img;
+	var token;
+	var user;
+	var sendMessage;
+
+	$(function() {
+		token = '{{token}}';
+		user = '{{user}}';
+		console.log('token=' + token);
+		console.log('user=' + user);
+	});
 
 	function onLoad() {
 		var convasDiv = document.getElementById("main");
@@ -85,12 +99,10 @@
 		//ctx.putImageData(img, 0, 0);
 	}
 	</script>
-</head>
-<body onLoad = "onLoad();">
-<div id="main">
-	<input onclick="saveCanvas();" type="button" value="SAVE" />
-	<input onclick="redoCanvas();" type="button" value="REDO" />
-	<input onclick="mailCanvas();" type="button" value="MAIL" />
-</div>
+	<div id="main">
+		<input onclick="saveCanvas();" type="button" value="SAVE" />
+		<input onclick="redoCanvas();" type="button" value="REDO" />
+		<input onclick="mailCanvas();" type="button" value="MAIL" />
+	</div>
 </body>
 </html>
