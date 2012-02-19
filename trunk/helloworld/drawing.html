@@ -16,6 +16,10 @@
 		-webkit-border-radius: 10px;    /* Safari,Google Chrome—p */  
 		-moz-border-radius: 10px;   	/* Firefox—p */ 
 	}
+	canvas {
+		background:white;
+		border:2px solid #999;
+	}
 	</style>
 </head>
 <body onLoad = "onLoad();">
@@ -88,6 +92,7 @@
 		myCanvas = document.createElement("canvas");
 		myCanvas.width = 960;
 		myCanvas.height = 576;
+
 		convasDiv.appendChild(myCanvas);
 
 		var ctx = myCanvas.getContext('2d');
