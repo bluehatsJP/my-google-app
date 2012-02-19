@@ -55,6 +55,9 @@ handlers:
 - url: /drawing
   script: drawing.py
 
+- url: /drawingPost
+  script: drawing.py
+
 - url: /readingOut
   script: readingOut.py
 
