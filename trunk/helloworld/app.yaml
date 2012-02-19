@@ -52,9 +52,8 @@ handlers:
 - url: /cookingSearch
   script: cookingSearch.py
 
-- url: /drawing.html
-  static_files: drawing.html
-  upload: drawing.html
+- url: /drawing
+  script: drawing.py
 
 - url: /readingOut
   script: readingOut.py
