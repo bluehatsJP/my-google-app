@@ -15,12 +15,60 @@
 	var token;
 	var user;
 	var sendMessage;
+	var message;
 
 	$(function() {
 		token = '{{token}}';
 		user = '{{user}}';
 		console.log('token=' + token);
 		console.log('user=' + user);
+
+		message = {
+			token: token,
+			user: user,
+			startx: new Array(),
+			starty: new Array(),
+			endx: new Array(),
+			endy: new Array()
+		};
+
+		sendMessage = function(data) {
+			$.ajax({
+				url: '/drawingPost',
+				type: 'POST',
+				data: data
+			});
+		};
+
+		channel = new goog.appengine.Channel(token);
+		socket = channel.open();
+
+		socket.onopen = function() {
+			console.log('open');
+		};
+
+		socket.onmessage = function(msg) {
+			console.log('onmessage=' + msg['data']);
+
+			var recepMessage = JSON.parse(msg['data']);
+
+			var ctx = myCanvas.getContext('2d');
+
+			for (i = 0; i < recepMessage.startx.length; i++) {
+				ctx.beginPath();
+				ctx.moveTo(recepMessage.startx[i],recepMessage.starty[i]);
+				ctx.lineTo(recepMessage.endx[i],recepMessage.endy[i]);
+				ctx.stroke();
+			}
+		};
+
+		socket.onerror = function() {
+			console.log('error');
+		};
+
+		socket.onclose = function() {
+			console.log('close');
+		};
 	});
 
 	function onLoad() {
@@ -42,6 +90,12 @@
 				ctx.moveTo(x,y);
 				ctx.lineTo(mouseX,mouseY);
 				ctx.stroke();
+
+				// 送信メッセージ更新
+				message.startx[message.startx.length] = x;
+				message.starty[message.starty.length] = y;
+				message.endx[message.endx.length] = mouseX;
+				message.endy[message.endy.length] = mouseY;
 			}
 			x = mouseX;
 			y = mouseY;
@@ -50,6 +104,9 @@
 			blush = true;
 		});
 		document.addEventListener("mouseup",function() {
+			// メッセージ送信
+			sendMessage(JSON.stringify(message));
+
 			blush = false;
 		});
 
@@ -61,6 +118,12 @@
 				ctx.moveTo(x,y);
 				ctx.lineTo(mouseX,mouseY);
 				ctx.stroke();
+
+				// 送信メッセージ更新
+				message.startx[message.startx.length] = x;
+				message.starty[message.starty.length] = y;
+				message.endx[message.endx.length] = mouseX;
+				message.endy[message.endy.length] = mouseY;
 			}
 			x = mouseX;
 			y = mouseY;
@@ -72,6 +135,9 @@
 			y = event.touches[0].pageY - canvasRect.top;
 		},false);
 		document.addEventListener("touchend",function() {
+			// メッセージ送信
+			sendMessage(JSON.stringify(message));
+
 			blush = false;
 		},false);
 	}

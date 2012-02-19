@@ -33,10 +33,11 @@ class MainPage(webapp.RequestHandler):
 class PostPage(webapp.RequestHandler):
 	def post(self):
 		# requestæ“¾
-		req_data = self.request.get('data')
+		#req_data = self.request.get('data')
 
 		# Channel‚Å‘¼‚Ìƒ†[ƒU‚É’Ê’m
-		channel.send_message('draw',req_data)
+		#channel.send_message('draw',simplejson.dumps(req_data))
+		channel.send_message('draw',self.request.body)
 
 application = webapp.WSGIApplication(
 									[('/drawing',MainPage),
