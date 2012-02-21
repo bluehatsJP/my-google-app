@@ -10,13 +10,20 @@ from django.utils import simplejson
 
 class MainPage(webapp.RequestHandler):
 	def get(self):
+		# 表示するHTMLファイルのパス取得
 		path = os.path.join(os.path.dirname(__file__),'drawing.html')
+
+		# リクエストからtoken(ボード名称)取得
+		boardname = self.request.get('bname')
 
 		# ユーザID生成
 		user = time.time()
 
-		# Channel生成
-		token = channel.create_channel('draw')
+		# Channel生成(リクエストにボード名称がない場合、tokenには固定値"draw"を設定)
+		if (boardname):
+			token = channel.create_channel(boardname)
+		else:
+			token = channel.create_channel('draw')
 
 		# response生成
 		res_values = {
@@ -32,12 +39,12 @@ class MainPage(webapp.RequestHandler):
 
 class PostPage(webapp.RequestHandler):
 	def post(self):
-		# request取得
-		#req_data = self.request.get('data')
+		# request取得を連想配列で取得
+		req_data = simplejson.loads(self.request.body)
 
 		# Channelで他のユーザに通知
 		#channel.send_message('draw',simplejson.dumps(req_data))
-		channel.send_message('draw',self.request.body)
+		channel.send_message(req_data["token"],self.request.body)
 
 application = webapp.WSGIApplication(
 									[('/drawing',MainPage),
