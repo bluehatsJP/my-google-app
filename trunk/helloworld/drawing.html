@@ -35,12 +35,15 @@
 
 	$(function() {
 		token = '{{token}}';
+		bname = '{{bname}}';
 		user = '{{user}}';
 		console.log('token=' + token);
+		console.log('bname=' + bname);
 		console.log('user=' + user);
 
 		message = {
 			token: token,
+			bname: bname,
 			user: user,
 			startx: new Array(),
 			starty: new Array(),
@@ -90,8 +93,8 @@
 	function onLoad() {
 		var convasDiv = document.getElementById("main");
 		myCanvas = document.createElement("canvas");
-		myCanvas.width = 960;
-		myCanvas.height = 576;
+		myCanvas.width = 935;
+		myCanvas.height = 596;
 
 		convasDiv.appendChild(myCanvas);
 
