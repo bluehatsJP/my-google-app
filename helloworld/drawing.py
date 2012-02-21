@@ -24,10 +24,12 @@ class MainPage(webapp.RequestHandler):
 			token = channel.create_channel(boardname)
 		else:
 			token = channel.create_channel('draw')
+			boardname = 'draw'
 
 		# response¶¬
 		res_values = {
 						'token': token,
+						'bname':boardname,
 					  	'user': user,
 						'startx': [],
 						'starty': [],
@@ -44,7 +46,7 @@ class PostPage(webapp.RequestHandler):
 
 		# Channel‚Å‘¼‚Ìƒ†[ƒU‚É’Ê’m
 		#channel.send_message('draw',simplejson.dumps(req_data))
-		channel.send_message(req_data["token"],self.request.body)
+		channel.send_message(req_data["bname"],self.request.body)
 
 application = webapp.WSGIApplication(
 									[('/drawing',MainPage),
