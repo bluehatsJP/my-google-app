@@ -36,15 +36,15 @@
 	// readyイベント
 	$(function() {
 
-		// スマートフォンで縦持ちの場合、アラート表示
-		$(window).bind("load orientationchange", function() {
-			if(Math.abs(window.orientation) != 90) {
-				alert('横持ちのほうが使いやすいよ！');
-			}
-		});
-
 		// スマートフォンURLアドレスバー隠し対応
 		setTimeout(scrollTo, 100, 0, 1);
+		// スマートフォンで持ち方を変えた場合、再度スマートフォンURLアドレスバー隠し処理
+		$(window).bind("load orientationchange", function() {
+			setTimeout(scrollTo, 100, 0, 1);
+			//if(Math.abs(window.orientation) != 90) {
+			//	alert('横持ちのほうが使いやすいよ！');
+			//}
+		});
 
 		token = '{{token}}';
 		bname = '{{bname}}';
