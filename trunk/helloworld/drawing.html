@@ -36,16 +36,6 @@
 	// readyイベント
 	$(function() {
 
-		// スマートフォンURLアドレスバー隠し対応
-		setTimeout(scrollTo, 100, 0, 1);
-		// スマートフォンで持ち方を変えた場合、再度スマートフォンURLアドレスバー隠し処理
-		$(window).bind("load orientationchange", function() {
-			setTimeout(scrollTo, 100, 0, 1);
-			//if(Math.abs(window.orientation) != 90) {
-			//	alert('横持ちのほうが使いやすいよ！');
-			//}
-		});
-
 		token = '{{token}}';
 		bname = '{{bname}}';
 		user = '{{user}}';
@@ -105,10 +95,21 @@
 	// onloadイベント
 	function onLoad() {
 
+		// スマートフォンURLアドレスバー隠し対応
+		setTimeout(scrollTo, 100, 0, 1);
+		// スマートフォンで持ち方を変えた場合、再度スマートフォンURLアドレスバー隠し処理
+		$(window).bind("load orientationchange", function() {
+			setTimeout(scrollTo, 100, 0, 1);
+			//if(Math.abs(window.orientation) != 90) {
+			//	alert('横持ちのほうが使いやすいよ！');
+			//}
+		});
+
 		var convasDiv = document.getElementById("main");
 		myCanvas = document.createElement("canvas");
 		myCanvas.width = 935;
-		myCanvas.height = 596;
+//		myCanvas.height = 596;
+		myCanvas.height = 500;
 
 		convasDiv.appendChild(myCanvas);
 
