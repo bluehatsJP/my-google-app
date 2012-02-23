@@ -33,7 +33,19 @@
 	var sendMessage;
 	var message;
 
+	// readyイベント
 	$(function() {
+
+		// スマートフォンで縦持ちの場合、アラート表示
+		$(window).bind("load orientationchange", function() {
+			if(Math.abs(window.orientation) != 90) {
+				alert('横持ちのほうが使いやすいよ！');
+			}
+		});
+
+		// スマートフォンURLアドレスバー隠し対応
+		setTimeout(scrollTo, 100, 0, 1);
+
 		token = '{{token}}';
 		bname = '{{bname}}';
 		user = '{{user}}';
@@ -90,7 +102,9 @@
 		};
 	});
 
+	// onloadイベント
 	function onLoad() {
+
 		var convasDiv = document.getElementById("main");
 		myCanvas = document.createElement("canvas");
 		myCanvas.width = 935;
