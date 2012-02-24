@@ -39,9 +39,9 @@
 		token = '{{token}}';
 		bname = '{{bname}}';
 		user = '{{user}}';
-		console.log('token=' + token);
-		console.log('bname=' + bname);
-		console.log('user=' + user);
+//		console.log('token=' + token);
+//		console.log('bname=' + bname);
+//		console.log('user=' + user);
 
 		message = {
 			token: token,
@@ -65,11 +65,11 @@
 		socket = channel.open();
 
 		socket.onopen = function() {
-			console.log('open');
+//			console.log('open');
 		};
 
 		socket.onmessage = function(msg) {
-			console.log('onmessage=' + msg['data']);
+//			console.log('onmessage=' + msg['data']);
 
 			var recepMessage = JSON.parse(msg['data']);
 
@@ -196,7 +196,7 @@
 	function redoCanvas() {
 		var ctx = myCanvas.getContext('2d');
 		ctx.drawImage(img, 0, 0);
-		console.log(img.src)
+//		console.log(img.src)
 		//ctx.putImageData(img, 0, 0);
 	}
 	</script>
