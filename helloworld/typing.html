@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Fire Typing</title>
+<mata http-eqiv="Cotent-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+var inputline = 0;
+var question;
+var answer;
+$(function() {
+	question = $("#question").val().split("\n");
+	// debug log
+	console.log(question[0]);
+	console.log(question[1]);
+	$("#answer").keypress(function(e) {
+		answer = $("#answer").val().split("\n");
+		// debug log
+		console.log(e.which);
+		console.log("inputline=" + inputline);
+		if(e.which == 13 && question[inputline] == answer[inputline]) {
+			console.log($("#answer").val());
+			alert("successed line[" + inputline + "]");
+			inputline++;
+		}
+	});
+});
+
+// reference (http://ar.aichi-u.ac.jp/blog/textarea-tab4.html Thank you!!)
+function insertTab(o, e)
+{
+    var keycode = e.keyCode ? e.keyCode : e.charCode ? e.charCode : e.which;
+    if (keycode == 9 && !e.shiftKey && !e.ctrlKey && !e.altKey) {
+        var oS = o.scrollTop; // Set the current scroll position.
+        if (o.setSelectionRange) {
+            // For: Opera + FireFox + Safari + Chrome
+            var sS = o.selectionStart;
+            var sE = o.selectionEnd;
+            o.value = o.value.substring(0, sS) + "\t" + o.value.substr(sE);
+            o.setSelectionRange(sS + 1, sS + 1);
+            o.focus();
+        } else if (o.createTextRange) {
+            // For: MSIE
+            document.selection.createRange().text = "\t"; // String.fromCharCode(9)
+            //o.onblur = function() { o.focus(); o.onblur = null; };
+            e.returnValue = false;
+        } else {
+            alert('Please contact the admin and tell xe that the tab functionality does not work in your browser.');
+        }
+        o.scrollTop = oS; // Return to the original scroll position.
+        if (e.preventDefault) { // DOM
+            e.preventDefault();
+        }
+        return false; // Not needed, but good practice.
+    }
+    return true;
+}
+</script>
+<style type="text/css">
+div.horizon {
+	float: left;
+}
+</style>
+</head>
+<body>
+<!-- ‰¡‚É•À‚×‚é -->
+<div class="horizon">
+<textarea id="question" cols="75" rows="40" disabled>
+#include <iostream>
+#include <map>
+using namespace std;
+
+void main(void) {
+	map<char, int> m1;
+	int i;
+
+	for(i=0; i<10; i++) {
+		m1.insert(pair<char, int>('A'+i, i));
+	}
+
+	char ch = 'C';
+	map<char, int>::iterator p;
+	p = m1.find(ch);
+	if(p == m1.end()) {
+		cout << "cannot find '" << ch << "'" << end1;
+	} else {
+		cout << "fount in m1 '" << ch << "'" << end1;
+	}
+
+	m1.clear();
+	p = m1.find(ch);
+	if(p == m1.end()) {
+		cout << "cannot find '" << ch << "'" << end1;
+	} else {
+		cout << "found in m1 '" << ch << "'" << end1;
+	}
+}
+</textarea>
+</div>
+<div class="horizon">
+	<textarea id="answer" name="answer" cols="75" rows="40" onkeydown="insertTab(this, event);"></textarea>
+</div>
+</body>
+</html>
