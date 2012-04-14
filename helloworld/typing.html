@@ -8,6 +8,11 @@
 var inputline = 0;
 var question;
 var answer;
+var startflg = false;
+var startDate;
+var endDate;
+var resultTime;
+
 $(function() {
 	// 問題文を1行ごとに分割
 	question = $("#question").val().split("\n");
@@ -17,6 +22,13 @@ $(function() {
 
 	// キー押下時のコールバックイベント定義
 	$("#answer").keypress(function(e) {
+
+		// startflgがfalseの場合、計測開始
+		if(!startflg) {
+			startDate = new Date();
+			startflg = true;
+		}
+
 		// 回答を改行コードで分割
 		answer = $("#answer").val().split("\n");
 		// debug log
@@ -27,7 +39,9 @@ $(function() {
 		// 押下キーがエンターで問題文と回答文が同じ場合、正解時の処理へ
 		if(e.which == 13 && question[inputline] == answer[inputline]) {
 			console.log($("#answer").val());
-			alert("successed line[" + inputline + "]");
+			endDate = new Date();
+			resultTime = endDate - startDate;
+			alert("successed line[" + inputline + "] = " + resultTime/1000);
 			inputline++;
 		}
 	});
