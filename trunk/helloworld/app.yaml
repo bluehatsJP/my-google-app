@@ -61,5 +61,9 @@ handlers:
 - url: /readingOut
   script: readingOut.py
 
+- url: /typing
+  static_files: typing.html
+  upload: typing.html
+
 - url: /.*
   script: helloworld.py
