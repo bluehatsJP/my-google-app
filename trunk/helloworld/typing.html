@@ -50,15 +50,20 @@ $(function() {
 
 			if(lastline == inputline) {
 				endDate = new Date();
-				resultTime = endDate - startDate;
 
-				alert("finished!! total input time = " + resultTime/1000 + "\n" + totalChars/(resultTime/1000) + "chars/sec");
+				resultTime = endDate - interimDate;
+				$('<li>',{class:'interim', html:'successed line[' + inputline + '] time = ' + resultTime/1000}).appendTo('#results');
+
+				resultTime = endDate - startDate;
+				$('<li>',{class:'finished', html:'finished!! total time = ' + resultTime/1000}).appendTo('#results');
+				$('<li>',{class:'finished', html:totalChars/(resultTime/1000) + 'chars/sec'}).appendTo('#results');
+				//alert("finished!! total input time = " + resultTime/1000 + "\n" + totalChars/(resultTime/1000) + "chars/sec");
 
 			} else {
 				endDate = new Date();
 				resultTime = endDate - interimDate;
-
-				alert("successed line[" + inputline + "] input time = " + resultTime/1000);
+				$('<li>',{class:'interim', html:'successed line[' + inputline + '] time = ' + resultTime/1000}).appendTo('#results');
+				//alert("successed line[" + inputline + "] input time = " + resultTime/1000);
 				interimDate = new Date();
 				inputline++;
 			}
@@ -101,11 +106,22 @@ function insertTab(o, e)
 div.horizon {
 	float: left;
 }
+li.interim {
+	font-size: 12px;
+}
+li.finished {
+	font-size: 15px;
+	font-weight: bold;
+}
+textarea {
+	font-size: 12px;
+}
 </style>
 </head>
 <body>
 <!-- ‰¡‚É•À‚×‚é -->
 <div class="horizon">
+<label>xxx.cc</label><br/>
 <textarea id="question" cols="75" rows="40" disabled>
 #include <iostream>
 #include <map>
@@ -138,7 +154,12 @@ void main(void) {
 }</textarea>
 </div>
 <div class="horizon">
+<label>xxx.cc</label><br/>
 	<textarea id="answer" name="answer" cols="75" rows="40" onkeydown="insertTab(this, event);" autofocus></textarea>
+</div>
+<div class="horizon">
+	<ul id="results" style="list-style-type:none">
+	</ul>
 </div>
 </body>
 </html>
