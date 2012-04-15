@@ -5,17 +5,24 @@
 <mata http-eqiv="Cotent-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript">
-var inputline = 0;
+var inputline = 1;
 var question;
+var lastline;
+var totalChars;
 var answer;
 var startflg = false;
 var startDate;
 var endDate;
 var resultTime;
+var interimDate;
 
 $(function() {
 	// 問題文を1行ごとに分割
 	question = $("#question").val().split("\n");
+	// 問題文の最終行数を取得
+	lastline = question.length;
+	// 問題文の文字数を取得
+	totalChars = $("#question").val().length;
 	// debug log
 	console.log(question[0]);
 	console.log(question[1]);
@@ -26,6 +33,7 @@ $(function() {
 		// startflgがfalseの場合、計測開始
 		if(!startflg) {
 			startDate = new Date();
+			interimDate = new Date();
 			startflg = true;
 		}
 
@@ -37,12 +45,23 @@ $(function() {
 
 		// 1行入力するごとに問題文との答え合わせ
 		// 押下キーがエンターで問題文と回答文が同じ場合、正解時の処理へ
-		if(e.which == 13 && question[inputline] == answer[inputline]) {
+		if(e.which == 13 && question[inputline -1] == answer[inputline - 1]) {
 			console.log($("#answer").val());
-			endDate = new Date();
-			resultTime = endDate - startDate;
-			alert("successed line[" + inputline + "] = " + resultTime/1000);
-			inputline++;
+
+			if(lastline == inputline) {
+				endDate = new Date();
+				resultTime = endDate - startDate;
+
+				alert("finished!! total input time = " + resultTime/1000 + "\n" + totalChars/(resultTime/1000) + "chars/sec");
+
+			} else {
+				endDate = new Date();
+				resultTime = endDate - interimDate;
+
+				alert("successed line[" + inputline + "] input time = " + resultTime/1000);
+				interimDate = new Date();
+				inputline++;
+			}
 		}
 	});
 });
@@ -116,11 +135,10 @@ void main(void) {
 	} else {
 		cout << "found in m1 '" << ch << "'" << end1;
 	}
-}
-</textarea>
+}</textarea>
 </div>
 <div class="horizon">
-	<textarea id="answer" name="answer" cols="75" rows="40" onkeydown="insertTab(this, event);"></textarea>
+	<textarea id="answer" name="answer" cols="75" rows="40" onkeydown="insertTab(this, event);" autofocus></textarea>
 </div>
 </body>
 </html>
