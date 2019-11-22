@@ -33,6 +33,6 @@ class RPCHandler(webapp2.RequestHandler):
 		else:
 			self.response.out.write('error.status_code == ' + res.status_code)
 
-application = webapp2.WSGIApplication(
+app = webapp2.WSGIApplication(
                                     [('/readingOut',RPCHandler)],
                                     debug=True)
