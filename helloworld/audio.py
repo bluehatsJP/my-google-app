@@ -11,6 +11,6 @@ class MainPage(webapp2.RequestHandler):
         
         self.response.out.write(template.render(path,template_values))
 
-application = webapp2.WSGIApplication(
+app = webapp2.WSGIApplication(
                                     [('/audio',MainPage)],
                                     debug=True)
