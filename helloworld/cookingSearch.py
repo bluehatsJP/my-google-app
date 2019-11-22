@@ -79,6 +79,6 @@ def _cookingSearch(purltext,pquery,presults):
             result = {'text':text,'title':title,'url':url}
             presults.append(result)
 
-application = webapp2.WSGIApplication(
+app = webapp2.WSGIApplication(
                                     [('/cookingSearch',RPCHandler)],
                                     debug=True)
