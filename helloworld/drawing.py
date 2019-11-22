@@ -3,9 +3,8 @@ import os
 import time
 
 from google.appengine.api import channel
-from google.appengine.ext import webapp2
-from google.appengine.ext.webapp2.util import run_wsgi_app
-from google.appengine.ext.webapp2 import template
+import webapp2
+from google.appengine.ext.webapp import template
 from django.utils import simplejson
 
 class MainPage(webapp2.RequestHandler):
@@ -52,9 +51,3 @@ application = webapp2.WSGIApplication(
 									[('/drawing',MainPage),
 									('/drawingPost',PostPage)],
 									debug=True)
-
-def main():
-	run_wsgi_app(application)
-
-if __name__ == "__main__":
-	main()
