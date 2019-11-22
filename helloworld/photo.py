@@ -36,6 +36,6 @@ class MainPage(webapp2.RequestHandler):
         client_id = str(self.request.get('client_id'))
         channel.send_message(client_id, 'audio play')
 
-application = webapp2.WSGIApplication(
+app = webapp2.WSGIApplication(
                                     [('/photo',MainPage)],
                                     debug=True)                                    
