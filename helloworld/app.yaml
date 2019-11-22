@@ -23,16 +23,16 @@ handlers:
   static_dir: css
 
 - url: /photo
-  script: photo.py
+  script: photo.app
 
 - url: /audio
-  script: audio.py
+  script: audio.app
 
 - url: /spot
-  script: spotlight.py
+  script: spotlight.app
 
 - url: /puzzle
-  script: puzzle.py
+  script: puzzle.app
 
 - url: /.html
   static_files: /\1
@@ -56,20 +56,20 @@ handlers:
   upload: cookingSearch.xml
 
 - url: /cookingSearch
-  script: cookingSearch.py
+  script: cookingSearch.app
 
 - url: /drawing
-  script: drawing.py
+  script: drawing.app
 
 - url: /drawingPost
-  script: drawing.py
+  script: drawing.app
 
 - url: /readingOut
-  script: readingOut.py
+  script: readingOut.app
 
 - url: /typing
   static_files: typing.html
   upload: typing.html
 
 - url: /.*
-  script: helloworld.py
+  script: helloworld.app
