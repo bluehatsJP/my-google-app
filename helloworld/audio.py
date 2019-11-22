@@ -1,10 +1,10 @@
 import os
 
-from google.appengine.ext import webapp
+from google.appengine.ext import webapp2
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__),'audio.html')
 
@@ -12,7 +12,7 @@ class MainPage(webapp.RequestHandler):
         
         self.response.out.write(template.render(path,template_values))
 
-application = webapp.WSGIApplication(
+application = webapp2.WSGIApplication(
                                     [('/audio',MainPage)],
                                     debug=True)
 
