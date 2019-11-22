@@ -1,15 +1,15 @@
 import os
 #import uuid
 
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.ext.webapp import template
+from google.appengine.ext import webapp2
+from google.appengine.ext.webapp2.util import run_wsgi_app
+from google.appengine.ext.webapp2 import template
 #from google.appengine.api import channel
 
 from gdata.alt import appengine
 from gdata.photos import service
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     def get(self):
         path = os.path.join(os.path.dirname(__file__),'photo.html')
 
@@ -37,7 +37,7 @@ class MainPage(webapp.RequestHandler):
         client_id = str(self.request.get('client_id'))
         channel.send_message(client_id, 'audio play')
 
-application = webapp.WSGIApplication(
+application = webapp2.WSGIApplication(
                                     [('/photo',MainPage)],
                                     debug=True)
 
