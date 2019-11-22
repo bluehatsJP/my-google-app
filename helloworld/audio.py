@@ -1,7 +1,6 @@
 import os
 
-from google.appengine.ext import webapp2
-from google.appengine.ext.webapp2.util import run_wsgi_app
+import webapp2
 from google.appengine.ext.webapp2 import template
 
 class MainPage(webapp2.RequestHandler):
@@ -15,10 +14,3 @@ class MainPage(webapp2.RequestHandler):
 application = webapp2.WSGIApplication(
                                     [('/audio',MainPage)],
                                     debug=True)
-
-def main():
-    run_wsgi_app(application)
-
-if __name__ == "__main__":
-    main()
-                                    
