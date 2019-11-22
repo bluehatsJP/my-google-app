@@ -1,7 +1,7 @@
 import os
 import random
 
-webapp2
+import webapp2
 from google.appengine.ext.webapp import template
 
 from gdata.alt import appengine
