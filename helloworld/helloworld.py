@@ -2,10 +2,9 @@ import cgi
 import os
 
 from google.appengine.api import users
-from google.appengine.ext import webapp2
-from google.appengine.ext.webapp2.util import run_wsgi_app
+import webapp2
 from google.appengine.ext import db
-from google.appengine.ext.webapp2 import template
+from google.appengine.ext.webapp import template
 
 class Greeting(db.Model):
     author = db.UserProperty()
@@ -66,11 +65,4 @@ class Guestbook(webapp2.RequestHandler):
 application = webapp2.WSGIApplication(
                                     [('/',MainPage),
                                      ('/sign',Guestbook)],
-                                    debug=True)
-
-def main():
-    run_wsgi_app(application)
-
-if __name__ == "__main__":
-    main()
-                                    
+                                    debug=True)                                    
