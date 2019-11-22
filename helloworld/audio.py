@@ -1,8 +1,8 @@
 import os
 
 from google.appengine.ext import webapp2
-from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.ext.webapp import template
+from google.appengine.ext.webapp2.util import run_wsgi_app
+from google.appengine.ext.webapp2 import template
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
