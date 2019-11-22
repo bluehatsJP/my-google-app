@@ -4,12 +4,12 @@ import time
 from BeautifulSoup import BeautifulSoup
 from htmlentity2unicode import htmlentity2unicode as html2uni
 
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.ext.webapp import template
+from google.appengine.ext import webapp2
+from google.appengine.ext.webapp2.util import run_wsgi_app
+from google.appengine.ext.webapp2 import template
 from django.utils import simplejson
 
-class RPCHandler(webapp.RequestHandler):
+class RPCHandler(webapp2.RequestHandler):
     def get(self):
         # リクエストパラメータ取得
         #query = simplejson.loads(self.request.get('query'))
@@ -80,7 +80,7 @@ def _cookingSearch(purltext,pquery,presults):
             result = {'text':text,'title':title,'url':url}
             presults.append(result)
 
-application = webapp.WSGIApplication(
+application = webapp2.WSGIApplication(
                                     [('/cookingSearch',RPCHandler)],
                                     debug=True)
 
