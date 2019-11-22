@@ -2,17 +2,17 @@ import cgi
 import os
 
 from google.appengine.api import users
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
+from google.appengine.ext import webapp2
+from google.appengine.ext.webapp2.util import run_wsgi_app
 from google.appengine.ext import db
-from google.appengine.ext.webapp import template
+from google.appengine.ext.webapp2 import template
 
 class Greeting(db.Model):
     author = db.UserProperty()
     content = db.StringProperty(multiline=True)
     date = db.DateTimeProperty(auto_now_add=True)
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     def get(self):
         greetings_query = Greeting.all().order('-date')
         greetings = greetings_query.fetch(10)
@@ -52,7 +52,7 @@ class MainPage(webapp.RequestHandler):
         #    </form>
         #    </body></html>""")
 
-class Guestbook(webapp.RequestHandler):
+class Guestbook(webapp2.RequestHandler):
     def post(self):
         greeting = Greeting()
 
@@ -63,7 +63,7 @@ class Guestbook(webapp.RequestHandler):
         greeting.put()
         self.redirect('/')
 
-application = webapp.WSGIApplication(
+application = webapp2.WSGIApplication(
                                     [('/',MainPage),
                                      ('/sign',Guestbook)],
                                     debug=True)
