@@ -2,6 +2,7 @@ application: bluehatspractice
 version: 1
 runtime: python
 api_version: 1
+threadsafe: true
 
 handlers:
 - url: /stylesheets
