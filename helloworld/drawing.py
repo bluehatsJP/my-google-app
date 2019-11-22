@@ -3,30 +3,30 @@ import os
 import time
 
 from google.appengine.api import channel
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.ext.webapp import template
+from google.appengine.ext import webapp2
+from google.appengine.ext.webapp2.util import run_wsgi_app
+from google.appengine.ext.webapp2 import template
 from django.utils import simplejson
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
 	def get(self):
-		# •\¦‚·‚éHTMLƒtƒ@ƒCƒ‹‚ÌƒpƒXæ“¾
+		# è¡¨ç¤ºã™ã‚‹HTMLãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒ‘ã‚¹å–å¾—
 		path = os.path.join(os.path.dirname(__file__),'drawing.html')
 
-		# ƒŠƒNƒGƒXƒg‚©‚çtoken(ƒ{[ƒh–¼Ì)æ“¾
+		# ãƒªã‚¯ã‚¨ã‚¹ãƒˆã‹ã‚‰token(ãƒœãƒ¼ãƒ‰åç§°)å–å¾—
 		boardname = self.request.get('bname')
 
-		# ƒ†[ƒUID¶¬
+		# ãƒ¦ãƒ¼ã‚¶IDç”Ÿæˆ
 		user = time.time()
 
-		# Channel¶¬(ƒŠƒNƒGƒXƒg‚Éƒ{[ƒh–¼Ì‚ª‚È‚¢ê‡Atoken‚É‚ÍŒÅ’è’l"draw"‚ğİ’è)
+		# Channelç”Ÿæˆ(ãƒªã‚¯ã‚¨ã‚¹ãƒˆã«ãƒœãƒ¼ãƒ‰åç§°ãŒãªã„å ´åˆã€tokenã«ã¯å›ºå®šå€¤"draw"ã‚’è¨­å®š)
 		if (boardname):
 			token = channel.create_channel(boardname)
 		else:
 			token = channel.create_channel('draw')
 			boardname = 'draw'
 
-		# response¶¬
+		# responseç”Ÿæˆ
 		res_values = {
 						'token': token,
 						'bname':boardname,
@@ -39,16 +39,16 @@ class MainPage(webapp.RequestHandler):
 
 		self.response.out.write(template.render(path,res_values))
 
-class PostPage(webapp.RequestHandler):
+class PostPage(webapp2.RequestHandler):
 	def post(self):
-		# requestæ“¾‚ğ˜A‘z”z—ñ‚Åæ“¾
+		# requestå–å¾—ã‚’é€£æƒ³é…åˆ—ã§å–å¾—
 		req_data = simplejson.loads(self.request.body)
 
-		# Channel‚Å‘¼‚Ìƒ†[ƒU‚É’Ê’m
+		# Channelã§ä»–ã®ãƒ¦ãƒ¼ã‚¶ã«é€šçŸ¥
 		#channel.send_message('draw',simplejson.dumps(req_data))
 		channel.send_message(req_data["bname"],self.request.body)
 
-application = webapp.WSGIApplication(
+application = webapp2.WSGIApplication(
 									[('/drawing',MainPage),
 									('/drawingPost',PostPage)],
 									debug=True)
