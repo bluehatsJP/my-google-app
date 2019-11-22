@@ -1,9 +1,8 @@
 import os
 import random
 
-from google.appengine.ext import webapp2
-from google.appengine.ext.webapp2.util import run_wsgi_app
-from google.appengine.ext.webapp2 import template
+webapp2
+from google.appengine.ext.webapp import template
 
 from gdata.alt import appengine
 from gdata.photos import service
@@ -38,10 +37,3 @@ class MainPage(webapp2.RequestHandler):
 application = webapp2.WSGIApplication(
                                     [('/spot',MainPage)],
                                     debug=True)
-
-def main():
-    run_wsgi_app(application)
-
-if __name__ == "__main__":
-    main()
-                                    
