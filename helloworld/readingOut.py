@@ -1,11 +1,10 @@
 #!-*- coding:utf-8 -*-
 import urllib
 
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp.util import run_wsgi_app
+import webapp2
 from google.appengine.api import urlfetch
 
-class RPCHandler(webapp.RequestHandler):
+class RPCHandler(webapp2.RequestHandler):
     def get(self):
 		# リクエストパラメータ取得
 		lang = self.request.get('tl').encode('utf_8')
@@ -34,12 +33,6 @@ class RPCHandler(webapp.RequestHandler):
 		else:
 			self.response.out.write('error.status_code == ' + res.status_code)
 
-application = webapp.WSGIApplication(
+application = webapp2.WSGIApplication(
                                     [('/readingOut',RPCHandler)],
                                     debug=True)
-
-def main():
-    run_wsgi_app(application)
-
-if __name__ == "__main__":
-    main()
