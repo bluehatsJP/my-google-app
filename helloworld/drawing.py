@@ -47,7 +47,7 @@ class PostPage(webapp2.RequestHandler):
 		#channel.send_message('draw',simplejson.dumps(req_data))
 		channel.send_message(req_data["bname"],self.request.body)
 
-application = webapp2.WSGIApplication(
+app = webapp2.WSGIApplication(
 									[('/drawing',MainPage),
 									('/drawingPost',PostPage)],
 									debug=True)
